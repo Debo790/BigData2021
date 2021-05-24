@@ -8,34 +8,42 @@ import json
 # Le società sono numerate in ordine progressivo, ma alcuni numeri mancano (forse alcune società sono state chiuse o trasferite),
 # quindi prima salviamo tutti i codici delle società in una lista, poi ne estraiamo i dettagli dai relativi link, ciclando la lista stessa
 
-all_societa="https://www.coni.it/it/registro-societa-sportive/home/registro-2-0.html?/reg=0&start=" 
+all_societa="https://www.coni.it/it/registro-societa-sportive/home/registro-2-0.html?reg=0&start=" 
 codici_societa=[]           # link contenente i codici di tutte le società
 dati_societa=[]             # lista di dizionari con i dettagli delle società
 
 for k in range(0,60,20):    #ciclare fino a 102260 (in totale sono 102265. 5 società sull'ultima pagina)
     indirizzo=all_societa+str(k)
+    print("Fetching {}".format(indirizzo))
     page=requests.get(indirizzo)
     soup = BeautifulSoup(page.content, 'html.parser')
     results = soup.find('div', class_='lista')
+    el = 0
     for element in results:
+        print("In results... Association no. {}".format(el))
+        el+=1
         if len(element)>1:
             numero = str(element).split()[2]                # link società
             numero=numero.strip('">')               
             codici_societa.append(numero.split('=')[-1])    # codice società
+    print("Parsed {} associations".format(k+20))
+    print("-----------------------------------------------")
 
+print("Associations' codes: ")
 print(codici_societa)
-
+print("-----------------------------------------------")
 #---------------------------------------------------------------------------------------------------
 
     
 # ESTRAZIONE DATI SOCIETA'--------------------------------------------------------------------------
+print("Extracting associations data.....")
 baseURL="https://www.coni.it/it/registro-societa-sportive/home/registro-2-0/registro_dettaglio.html?id_societa="
 
 
 for codice in codici_societa:
     indirizzo=baseURL+str(codice)
     page = requests.get(indirizzo)
-   #print(page.content)
+    #print(page.content)
     soup = BeautifulSoup(page.content, 'html.parser')
     #trovo la parte della pagina che mi interessa:
     results = soup.find('section', id='component')
@@ -59,6 +67,8 @@ for codice in codici_societa:
     'Praticanti:': agonistici_praticanti[1]
     }
     dati_societa.append(dettaglio)
+    print("Adding: {}".format(dettaglio["Name:"]))
+    
 #-----------------------------------------------------------
 
 
