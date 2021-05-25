@@ -20,12 +20,12 @@ for k in range(0,60,20):    #ciclare fino a 102260 (in totale sono 102265. 5 soc
     results = soup.find('div', class_='lista')
     el = 0
     for element in results:
-        print("In results... Association no. {}".format(el))
-        el+=1
         if len(element)>1:
             numero = str(element).split()[2]                # link società
             numero=numero.strip('">')               
             codici_societa.append(numero.split('=')[-1])    # codice società
+            print("In results... Association no. {}".format(el))
+            el+=1
     print("Parsed {} associations".format(k+20))
     print("-----------------------------------------------")
 
