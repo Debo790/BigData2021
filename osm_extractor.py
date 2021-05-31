@@ -2,16 +2,21 @@ import geopandas as gpd
 from geopandas.geodataframe import GeoDataFrame
 from osm2geojson.helpers import overpass_call
 from osm2geojson.main import xml2geojson
+from osm2geojson.main import json2geojson
 import argparse
+import time
 
 class CityExtractor:
 
-    def __init__(self, city:str, items: GeoDataFrame) -> None:
+    def __init__(self, city:str):
         self.city = city
-        self.items = items
+        self.items = None
+        self.boundary = None
 
     def extract(self):
         
+        print("Extracting nwr for {}".format(self.city))
+
         # nwr stays for "node, ways and relation"
         # every item with a sport tag is included
         # out geom adds geometries to each item
@@ -27,11 +32,42 @@ class CityExtractor:
             out geom qt;
             '''.format(self.city)
 
+        ti = time.time()
         result = overpass_call(myquery)
         res = xml2geojson(result)
         self.items = gpd.GeoDataFrame.from_features(res)
-        print("Parsed {} elements for {}".format(len(self.items), self.city))
+        if len(self.items) <= 0:
+            raise ConnectionError("No items were found for {}. Try with another city or check your Overpass query limit.".format(self.city))
+        else:
+
+            tf = time.time()
+            print("Extracted {} elements for {}. Time elapsed: {} s".format(len(self.items), self.city, round(tf-ti, 2)))
+    
+    def get_boundary(self):
+
+        print("Getting boundaries for {}".format(self.city))
+
+        query = '''
+            [out:json];
+            area["name"="Italia"]->.wrap;
+            rel["name"="{}"][type=boundary](area.wrap);
+
+            out geom;
+        '''.format(self.city)
+
+        ti = time.time()
         
+        result = overpass_call(query)
+        res = json2geojson(result)
+        self.boundary = gpd.GeoDataFrame.from_features(res)
+        
+        if len(self.boundary) <= 0:
+            raise ConnectionError("No boundaries were found for {}. Try with another city or check your Overpass query limit.".format(self.city))
+        else:
+            tf = time.time()
+            print("Extracted boundaries for {}. Time elapsed: {} s".format(self.city, round(tf-ti, 2)))
+        
+               
     def update(self):
         # Update Redis
         print("Redis updating...")
@@ -42,6 +78,7 @@ class CityExtractor:
 
     def run(self) -> bool:
         self.extract()
+        self.get_boundary()
         self.update()
         self.load()
         return True
@@ -56,7 +93,7 @@ if __name__ == "__main__":
 
     city = args.city
 
-    ce = CityExtractor(city, None)
+    ce = CityExtractor(city)
     success = ce.run()
 
     if success:
