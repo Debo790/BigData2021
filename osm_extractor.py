@@ -15,7 +15,7 @@ class CityExtractor:
 
     def extract(self):
         
-        print("Extracting nwr for {}".format(self.city))
+        print("Extracting nwr and routes for {}".format(self.city))
 
         # nwr stays for "node, ways and relation"
         # every item with a sport tag is included
@@ -29,6 +29,13 @@ class CityExtractor:
             nwr["landuse"="winter_sports"](area.searchArea);
             nwr["leisure"="fitness_station"](area.searchArea);
             );
+            out geom qt;
+            rel(pivot.searchArea)(area.wrap) -> .ex;
+            //.ex out geom;
+            way(r.ex)->.cross;
+            relation(around.cross:0)["route"="hiking"]->.remove;
+            relation["route"="hiking"](area.searchArea)->.all;
+            (.all; - .remove;);
             out geom qt;
             '''.format(self.city)
 
@@ -49,8 +56,9 @@ class CityExtractor:
 
         query = '''
             [out:json];
-            area["name"="Italia"]->.wrap;
-            rel["name"="{}"][type=boundary](area.wrap);
+            area[name="{}"][admin_level=8][boundary=administrative]->.target;
+            area["name"="Italia"][boundary=administrative]->.wrap;
+            rel(pivot.target)(area.wrap);
 
             out geom;
         '''.format(self.city)
