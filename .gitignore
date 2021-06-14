@@ -18,3 +18,4 @@ venv.bak/
 
 # DB data
 conf/config.ini
+conf/auth.json
