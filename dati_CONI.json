@@ -1,0 +1,542 @@
+[
+    {
+        "code:": "1",
+        "Name:": "A.S.D. VISPA VOLLEY",
+        "Region:": "Veneto",
+        "Province:": "PD",
+        "Comune:": "Saonara",
+        "Agonistici:": "86",
+        "Praticanti:": "19"
+    },
+    {
+        "code:": "2",
+        "Name:": "ASSOCIAZIONE SPORTIVA DILETTANTISTICA LIBERTAS POLISPORTIVA ALTICHIERO",
+        "Region:": "Veneto",
+        "Province:": "PD",
+        "Comune:": "Padova",
+        "Agonistici:": "0",
+        "Praticanti:": "4"
+    },
+    {
+        "code:": "3",
+        "Name:": "PALESTRA LINEA CLUB",
+        "Region:": "Veneto",
+        "Province:": "PD",
+        "Comune:": "Vigonza",
+        "Agonistici:": "0",
+        "Praticanti:": "33"
+    },
+    {
+        "code:": "4",
+        "Name:": "UNIONE CADONEGHE SSDARL",
+        "Region:": "Veneto",
+        "Province:": "PD",
+        "Comune:": "Cadoneghe",
+        "Agonistici:": "0",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "7",
+        "Name:": "VOLLEY FRATTE - ASSOCIAZIONE SPORTIVA DILETTANTISTICA",
+        "Region:": "Veneto",
+        "Province:": "PD",
+        "Comune:": "Santa",
+        "Agonistici:": "69",
+        "Praticanti:": "51"
+    },
+    {
+        "code:": "8",
+        "Name:": "ASSOCIAZIONE SPORTIVA DILETTANTISTICA SPORTING CLUB SAN GIACOMO",
+        "Region:": "Veneto",
+        "Province:": "PD",
+        "Comune:": "Albignasego",
+        "Agonistici:": "0",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "10",
+        "Name:": "ASSOCIAZIONE SPORTIVA FUNNY TEAM",
+        "Region:": "Veneto",
+        "Province:": "PD",
+        "Comune:": "Abano",
+        "Agonistici:": "0",
+        "Praticanti:": "8"
+    },
+    {
+        "code:": "11",
+        "Name:": "B.V.S. VOLLEY",
+        "Region:": "Veneto",
+        "Province:": "RO",
+        "Comune:": "Rovigo",
+        "Agonistici:": "27",
+        "Praticanti:": "2"
+    },
+    {
+        "code:": "12",
+        "Name:": "ASSOCIAZIONE DOPOLAVORO FERROVIARIO SULMONA L'AQUILA",
+        "Region:": "Abruzzo",
+        "Province:": "AQ",
+        "Comune:": "Sulmona",
+        "Agonistici:": "2",
+        "Praticanti:": "5"
+    },
+    {
+        "code:": "13",
+        "Name:": "ASSOCIAZIONE SPORTIVA DILETTANTISTICA BOCCIOFILA HELVIA RECINA VILLA POTENZA",
+        "Region:": "Marche",
+        "Province:": "MC",
+        "Comune:": "Macerata",
+        "Agonistici:": "23",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "14",
+        "Name:": "CIRCOLO NAUTICO FOCE CECINA A.S.D.",
+        "Region:": "Toscana",
+        "Province:": "LI",
+        "Comune:": "Cecina",
+        "Agonistici:": "34",
+        "Praticanti:": "6"
+    },
+    {
+        "code:": "15",
+        "Name:": "SABBATINI GIUSEPPE & C.SNC DI SABBATINI FABIO E GIANNI",
+        "Region:": "Marche",
+        "Province:": "AN",
+        "Comune:": "Sirolo",
+        "Agonistici:": "1",
+        "Praticanti:": "11"
+    },
+    {
+        "code:": "16",
+        "Name:": "ASSOCIAZIONE CRISTIANA DEI GIOVANI YMCA",
+        "Region:": "Calabria",
+        "Province:": "RC",
+        "Comune:": "Siderno",
+        "Agonistici:": "0",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "17",
+        "Name:": "ASSOCIAZIONE SPORTIVA DILETTANTISTICA-MOSSA",
+        "Region:": "Friuli-Venezia Giulia",
+        "Province:": "GO",
+        "Comune:": "Mossa",
+        "Agonistici:": "0",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "19",
+        "Name:": "DUE RUOTE CLASSICHE ASSOCIAZIONE SPORTIVA DILETTANTISTICA",
+        "Region:": "Veneto",
+        "Province:": "PD",
+        "Comune:": "Padova",
+        "Agonistici:": "5",
+        "Praticanti:": "221"
+    },
+    {
+        "code:": "20",
+        "Name:": "UNIONE GINNASTICA GORIZIANA",
+        "Region:": "Friuli-Venezia Giulia",
+        "Province:": "GO",
+        "Comune:": "Gorizia",
+        "Agonistici:": "18",
+        "Praticanti:": "12"
+    },
+    {
+        "code:": "23",
+        "Name:": "ASSOCIAZIONE SPORTIVA DILETTANTISTICA PALLAVOLO TREGAROFANI",
+        "Region:": "Veneto",
+        "Province:": "PD",
+        "Comune:": "Padova",
+        "Agonistici:": "75",
+        "Praticanti:": "43"
+    },
+    {
+        "code:": "24",
+        "Name:": "LEGA NAVALE ITALIANA SEZIONE DI BRINDISI",
+        "Region:": "Puglia",
+        "Province:": "BR",
+        "Comune:": "Brindisi",
+        "Agonistici:": "63",
+        "Praticanti:": "22"
+    },
+    {
+        "code:": "26",
+        "Name:": "CIRCOLO NAUTICO LOANO A.S.D.",
+        "Region:": "Liguria",
+        "Province:": "SV",
+        "Comune:": "Loano",
+        "Agonistici:": "54",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "27",
+        "Name:": "SCI CLUB GRESSONEY MONTE ROSA",
+        "Region:": "Valle d'Aosta/Vall\u00e9e d'Aoste",
+        "Province:": "AO",
+        "Comune:": "Gressoney-Saint-Jean",
+        "Agonistici:": "176",
+        "Praticanti:": "18"
+    },
+    {
+        "code:": "28",
+        "Name:": "A.S.D. VILLESSE CALCIO",
+        "Region:": "Friuli-Venezia Giulia",
+        "Province:": "GO",
+        "Comune:": "Villesse",
+        "Agonistici:": "0",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "29",
+        "Name:": "A.S.D. VALDIVARA 5 TERRE",
+        "Region:": "Liguria",
+        "Province:": "SP",
+        "Comune:": "Beverino",
+        "Agonistici:": "0",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "31",
+        "Name:": "UNIONE SPORTIVA PORTOVENERE ASD",
+        "Region:": "Liguria",
+        "Province:": "SP",
+        "Comune:": "Portovenere",
+        "Agonistici:": "11",
+        "Praticanti:": "10"
+    },
+    {
+        "code:": "36",
+        "Name:": "VELOCE CLUB VILLA DEL CONTE",
+        "Region:": "Veneto",
+        "Province:": "PD",
+        "Comune:": "Villa",
+        "Agonistici:": "0",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "37",
+        "Name:": "TIRO A SEGNO NAZIONALE SEZIONE DI BENEVENTO",
+        "Region:": "Campania",
+        "Province:": "BN",
+        "Comune:": "Benevento",
+        "Agonistici:": "23",
+        "Praticanti:": "63"
+    },
+    {
+        "code:": "38",
+        "Name:": "CIRCOLO NAUTICO DI GRADO PINETA",
+        "Region:": "Friuli-Venezia Giulia",
+        "Province:": "TS",
+        "Comune:": "Trieste",
+        "Agonistici:": "0",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "39",
+        "Name:": "BOCCIOFILA SARZANESE-ASSOCIAZIONE SPORTIVA",
+        "Region:": "Liguria",
+        "Province:": "SP",
+        "Comune:": "Sarzana",
+        "Agonistici:": "28",
+        "Praticanti:": "1"
+    },
+    {
+        "code:": "40",
+        "Name:": "ASSOCIAZIONE SPORTIVA DILETTANTISTICA PALLACANESTRO MONFALCONE",
+        "Region:": "Friuli-Venezia Giulia",
+        "Province:": "GO",
+        "Comune:": "Monfalcone",
+        "Agonistici:": "12",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "41",
+        "Name:": "ANCONA YACHT CLUB - SOCIETA' COOPERATIVA SPORTIVA DILETTANTISTICA",
+        "Region:": "Marche",
+        "Province:": "AN",
+        "Comune:": "Ancona",
+        "Agonistici:": "13",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "43",
+        "Name:": "AERO CLUB MARINA DI MASSA",
+        "Region:": "Toscana",
+        "Province:": "MS",
+        "Comune:": "Massa",
+        "Agonistici:": "0",
+        "Praticanti:": "24"
+    },
+    {
+        "code:": "44",
+        "Name:": "CIRCOLO NAUTICO DEL FINALE",
+        "Region:": "Liguria",
+        "Province:": "SV",
+        "Comune:": "Finale",
+        "Agonistici:": "32",
+        "Praticanti:": "4"
+    },
+    {
+        "code:": "46",
+        "Name:": "C.N.A.M. - CIRCOLO NAUTICO AL MARE - ASSOCIAZIONE SPORTIVA DILETTANTISTICA",
+        "Region:": "Liguria",
+        "Province:": "SV",
+        "Comune:": "Alassio",
+        "Agonistici:": "45",
+        "Praticanti:": "9"
+    },
+    {
+        "code:": "47",
+        "Name:": "UNITED PADOVA CSA 1924 S.S.D.A.R.L.",
+        "Region:": "Veneto",
+        "Province:": "PD",
+        "Comune:": "Camposampiero",
+        "Agonistici:": "0",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "48",
+        "Name:": "POLISPORTIVA SARRE CHESALLET - SEZIONE BASKET",
+        "Region:": "Valle d'Aosta/Vall\u00e9e d'Aoste",
+        "Province:": "AO",
+        "Comune:": "Aosta",
+        "Agonistici:": "16",
+        "Praticanti:": "51"
+    },
+    {
+        "code:": "49",
+        "Name:": "CENTRO UNIVERSITARIO SPORTIVO L'AQUILA ASS.SPORTIVA DILETTANTISTICA",
+        "Region:": "Abruzzo",
+        "Province:": "AQ",
+        "Comune:": "L'Aquila",
+        "Agonistici:": "62",
+        "Praticanti:": "779"
+    },
+    {
+        "code:": "50",
+        "Name:": "LEGA NAVALE ITALIANA SEZIONE DI CERIALE ASSOCIAZIONE SPORTIVA DILETTANTISTICA",
+        "Region:": "Liguria",
+        "Province:": "SV",
+        "Comune:": "Ceriale",
+        "Agonistici:": "24",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "52",
+        "Name:": "BOCCIOFILA DEL PORTO A.S.D.",
+        "Region:": "Abruzzo",
+        "Province:": "PE",
+        "Comune:": "Pescara",
+        "Agonistici:": "32",
+        "Praticanti:": "7"
+    },
+    {
+        "code:": "53",
+        "Name:": "CRAL ENRICO MATTEI ASSOCIAZIONE SPORTIVA DILETTANTISTICA",
+        "Region:": "Emilia-Romagna",
+        "Province:": "RA",
+        "Comune:": "Ravenna",
+        "Agonistici:": "214",
+        "Praticanti:": "275"
+    },
+    {
+        "code:": "57",
+        "Name:": "POLISPORTIVA CASSA DI RISPARMIO DI ASTI ASD",
+        "Region:": "Piemonte",
+        "Province:": "AT",
+        "Comune:": "Asti",
+        "Agonistici:": "0",
+        "Praticanti:": "24"
+    },
+    {
+        "code:": "61",
+        "Name:": "POLISPORTIVA TENCAROLA PALLAVOLO DILETTANTISTICA",
+        "Region:": "Veneto",
+        "Province:": "PD",
+        "Comune:": "Selvazzano",
+        "Agonistici:": "0",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "62",
+        "Name:": "OPERA FIGLI DEL POPOLO",
+        "Region:": "Friuli-Venezia Giulia",
+        "Province:": "TS",
+        "Comune:": "Trieste",
+        "Agonistici:": "63",
+        "Praticanti:": "50"
+    },
+    {
+        "code:": "64",
+        "Name:": "A.S.D. CIRCOLO TENNIS TERAMO",
+        "Region:": "Abruzzo",
+        "Province:": "TE",
+        "Comune:": "Teramo",
+        "Agonistici:": "30",
+        "Praticanti:": "3"
+    },
+    {
+        "code:": "66",
+        "Name:": "AERO CLUB LUIGI SELLA BIELLA",
+        "Region:": "Piemonte",
+        "Province:": "BI",
+        "Comune:": "Cerrione",
+        "Agonistici:": "0",
+        "Praticanti:": "107"
+    },
+    {
+        "code:": "67",
+        "Name:": "SIMEM S.P.A.",
+        "Region:": "Veneto",
+        "Province:": "VR",
+        "Comune:": "Minerbe",
+        "Agonistici:": "24",
+        "Praticanti:": "10"
+    },
+    {
+        "code:": "68",
+        "Name:": "VIVERE IL BALLETTO A.S.D.",
+        "Region:": "Veneto",
+        "Province:": "PD",
+        "Comune:": "Selvazzano",
+        "Agonistici:": "0",
+        "Praticanti:": "258"
+    },
+    {
+        "code:": "69",
+        "Name:": "ASSOCIAZIONE SPORTIVA DILETTANTISTICA ' BOCCIOFILA MACERATESE'",
+        "Region:": "Marche",
+        "Province:": "MC",
+        "Comune:": "Macerata",
+        "Agonistici:": "53",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "70",
+        "Name:": "CENTRO SPORTIVO CROCE VERDE VIAREGGIO ASSOCIAZIONE SPORTIVA DILET",
+        "Region:": "Toscana",
+        "Province:": "LU",
+        "Comune:": "Viareggio",
+        "Agonistici:": "0",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "71",
+        "Name:": "SOCIETA' SPORTIVA SAN GIOVANNI",
+        "Region:": "Friuli-Venezia Giulia",
+        "Province:": "TS",
+        "Comune:": "Trieste",
+        "Agonistici:": "0",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "72",
+        "Name:": "ASSOCIAZIONE GRUPPO SPORTIVO FAVRIA",
+        "Region:": "Friuli-Venezia Giulia",
+        "Province:": "PN",
+        "Comune:": "San",
+        "Agonistici:": "17",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "73",
+        "Name:": "AEROCLUB LUNENSE P. LOMBARDI",
+        "Region:": "Liguria",
+        "Province:": "SP",
+        "Comune:": "Sarzana",
+        "Agonistici:": "0",
+        "Praticanti:": "40"
+    },
+    {
+        "code:": "74",
+        "Name:": "YACHT CLUB IMPERIA ASSOC. SPORT. DILETT.",
+        "Region:": "Liguria",
+        "Province:": "IM",
+        "Comune:": "Imperia",
+        "Agonistici:": "36",
+        "Praticanti:": "11"
+    },
+    {
+        "code:": "75",
+        "Name:": "A.S.D. EUROTENNIS CLUB",
+        "Region:": "Friuli-Venezia Giulia",
+        "Province:": "PN",
+        "Comune:": "Cordenons",
+        "Agonistici:": "104",
+        "Praticanti:": "4"
+    },
+    {
+        "code:": "77",
+        "Name:": "ASSOCIAZIONE SPORTIVO CULTURALE DILETTANTISTICA CRAL FARRESE",
+        "Region:": "Veneto",
+        "Province:": "BL",
+        "Comune:": "Borgo",
+        "Agonistici:": "0",
+        "Praticanti:": "38"
+    },
+    {
+        "code:": "78",
+        "Name:": "CIRCOLO TENNIS IMPERIA ASD",
+        "Region:": "Liguria",
+        "Province:": "IM",
+        "Comune:": "Imperia",
+        "Agonistici:": "55",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "79",
+        "Name:": "A.S.D. PUGILISTA MASSESE",
+        "Region:": "Toscana",
+        "Province:": "MS",
+        "Comune:": "Massa",
+        "Agonistici:": "17",
+        "Praticanti:": "22"
+    },
+    {
+        "code:": "80",
+        "Name:": "APS ASD CIRCOLO TENNIS CASTIGLIONE",
+        "Region:": "Toscana",
+        "Province:": "GR",
+        "Comune:": "Castiglione",
+        "Agonistici:": "28",
+        "Praticanti:": "3"
+    },
+    {
+        "code:": "81",
+        "Name:": "A.S.DIL.BOCCIOFILA ACQUALAGNESE",
+        "Region:": "Marche",
+        "Province:": "PU",
+        "Comune:": "Acqualagna",
+        "Agonistici:": "11",
+        "Praticanti:": "0"
+    },
+    {
+        "code:": "82",
+        "Name:": "SOCIETA' SPORTIVA DILETTANTISTICA SENESEMENS SANA IN CORPORE SAN O1871",
+        "Region:": "Toscana",
+        "Province:": "SI",
+        "Comune:": "Siena",
+        "Agonistici:": "319",
+        "Praticanti:": "73"
+    },
+    {
+        "code:": "83",
+        "Name:": "ASSOCIAZIONE SPORTIVA DILETTANTISTICA CIRCOLO RICREATIVO SPORTIVO TALACCHIO",
+        "Region:": "Marche",
+        "Province:": "PU",
+        "Comune:": "Vallefoglia",
+        "Agonistici:": "0",
+        "Praticanti:": "8"
+    },
+    {
+        "code:": "86",
+        "Name:": "CIRCOLO TENNIS PESCARA ASD",
+        "Region:": "Abruzzo",
+        "Province:": "PE",
+        "Comune:": "Pescara",
+        "Agonistici:": "153",
+        "Praticanti:": "1"
+    }
+]
