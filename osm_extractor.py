@@ -11,7 +11,7 @@ class CityExtractor:
     def __init__(self, city:str):
         self.city = city
         self.items = None
-        self.boundary = None
+        #self.boundary = None
 
     def extract(self):
         
@@ -50,32 +50,6 @@ class CityExtractor:
             tf = time.time()
             print("Extracted {} elements for {}. Time elapsed: {} s".format(len(self.items), self.city, round(tf-ti, 2)))
     
-    def get_boundary(self):
-
-        print("Getting boundaries for {}".format(self.city))
-
-        query = '''
-            [out:json];
-            area[name="{}"][admin_level=8][boundary=administrative]->.target;
-            area["name"="Italia"][boundary=administrative]->.wrap;
-            rel(pivot.target)(area.wrap);
-
-            out geom;
-        '''.format(self.city)
-
-        ti = time.time()
-        
-        result = overpass_call(query)
-        res = json2geojson(result)
-        self.boundary = gpd.GeoDataFrame.from_features(res)
-        
-        if len(self.boundary) <= 0:
-            raise ConnectionError("No boundaries were found for {}. Try with another city or check your Overpass query limit.".format(self.city))
-        else:
-            tf = time.time()
-            print("Extracted boundaries for {}. Time elapsed: {} s".format(self.city, round(tf-ti, 2)))
-        
-               
     def update(self):
         # Update Redis
         print("Redis updating...")
@@ -86,7 +60,7 @@ class CityExtractor:
 
     def run(self) -> bool:
         self.extract()
-        self.get_boundary()
+        #self.get_boundary()
         self.update()
         self.load()
         return True
