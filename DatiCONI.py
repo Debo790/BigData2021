@@ -73,5 +73,5 @@ for codice in codici_societa:
 
 
 # OUTPUT FILE:
-with open('dati_CONI.json', 'w') as outfile:
+with open('tmp/dati_CONI.json', 'w') as outfile:
     json.dump(dati_societa, outfile)
