@@ -1,0 +1,224 @@
+{
+    "segments": [
+        {
+            "id": 13413524,
+            "resource_state": 2,
+            "name": "Colle Vertical Sportler",
+            "climb_category": 4,
+            "climb_category_desc": "1",
+            "avg_grade": 34.9,
+            "start_latlng": [
+                46.490692,
+                11.368675
+            ],
+            "end_latlng": [
+                46.478361,
+                11.36916
+            ],
+            "elev_difference": 783.7,
+            "distance": 2235.9,
+            "points": "yewzGemkdABEJ@BDHGLBDAFHDBFOA[HBHIBIDBJXHJDNPCDBDEGa@BWDCDDF`@D?T^L@BCDFDABELCHEBFJCR`@JHDND@Tg@D[D?DCDQ@FDAJHDMHK@IAR@FDDFMLQB@FNBBDODRDDP[BAFVBQRVBGB?BGFWLTHK@PD@BEJ@DNRb@DA@QBEJABNHJDADQBCBDHDAR@FL?DMBBFMDB@HDCL[Jh@AXHIFNBEBc@D@BEDY@HDC@FAHDADMBFLA@R@DTQ?HF?JIJ@DAIZDNAHDEL_@DABB@RKZCPD@?HDAHI@GV[C_@BQFYFIJp@N[LNDCXe@@F?XDE@GBCBDDABNCNBIHI@IV[BXCXN[DC@PDE?IDD@t@D?DWJIB[BDD??LLQR@BCAFBEJCBCBFDCBLB`@DAHMHEDA@HBATy@JBJEH`@FEDY@mACSDCFZ?XHVDA@E?HBCFKDBDMDND@DEBD?HJGFKBDDa@HLBPBQBFDC@YD@JRJh@HG@GNBBGr@EB@LCJBHKJANHJABEAUJQHLDCR@ZGRPF@R@LGNDL?D@PGX@JHRBTGRKVHVPDMHEJLRGJ?JGJ@PKDBDNBBLALBRKJ?JCJBXAj@I^@p@KDDHXTPTJDCGMD@AKDED??I",
+            "starred": false,
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/7YSMFNTUHYTLI5POLSKUHL7PLAL7EDF34FCVKFBGFYLNLXUSZG23TBGDMTNAM6GLFKKUBQKJ25VJEPKMDRFV4===",
+            "local_legend_enabled": true
+        },
+        {
+            "id": 7960988,
+            "resource_state": 2,
+            "name": "Rencio-Soprabolzano (fine sentiero 6)",
+            "climb_category": 5,
+            "climb_category_desc": "HC",
+            "avg_grade": 20.6,
+            "start_latlng": [
+                46.501055,
+                11.365583
+            ],
+            "end_latlng": [
+                46.521045,
+                11.394618
+            ],
+            "elev_difference": 819.6,
+            "distance": 3981.2,
+            "points": "qfyzG{yjdAQg@A]GWAm@Qm@O}Ak@sAWgAM[EQGcAk@mBIs@Oq@Ay@IWAq@Dk@FS@g@I_A?SKc@F_@?UIc@Ho@QK]IWKa@Uu@}@Uc@EMCm@Da@Ck@L{@?eAC[YiA]m@So@OWQMa@e@OiACMGGBSXu@@S?cAESIMIBGNGDCCCKA]Fu@BcAI{BGOIIE?MJAIF{@MoAAg@W{@CyAIy@Im@CaAKy@GSWkBMm@GcAMg@AYKe@m@uB]oBUy@GsAMc@Q{@oA_COSy@m@o@{@GA_@?]Dm@PE?QKS[EQc@y@o@q@i@c@YQYGKA@HLJ@NE@MEQCS@QKc@CIOMFQLW@ORQDWIEBOSMIy@GUG[MWG_@WMCMIIAYDOHo@z@[Rg@PKPIBGAWIOMa@Ek@DY?Sa@e@a@Yw@QQMUCKEKUMSEWOc@Kc@SISCUYoAGOo@k@QSSg@KMSOGMUYEAM@GAWFM?ILUHCE?[My@i@u@I@GDEPE@ETAXMLGNGt@IXMNUFKIIQI{@]o@QOKEKYKK[@e@e@IWSGWUMAc@K]EKFQR[PWFKGOQGSU}AYaAEm@Mq@QSy@e@GAISc@QEDGAQIKKYAGEIMYs@Q}@O_@GYUQMQ[m@IYa@k@[WE?IMEBKVK?EL",
+            "starred": false,
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/OEI7NWG527B32CYLYOWBXBQK4VMBK3FYC6OXG7EFRSL4HQRASRLWZDZRA6Y5J24CZHFK64SZLE7HWE2ZWX7A====",
+            "local_legend_enabled": true
+        },
+        {
+            "id": 5857880,
+            "resource_state": 2,
+            "name": "S. Genesio Climb 3",
+            "climb_category": 2,
+            "climb_category_desc": "3",
+            "avg_grade": 15.9,
+            "start_latlng": [
+                46.520578,
+                11.340103
+            ],
+            "end_latlng": [
+                46.528033,
+                11.336703
+            ],
+            "elev_difference": 243.0,
+            "distance": 1529.1,
+            "points": "q`}zGszedAIPEDKEUNCHa@HW?GIAN@NVrABTDADFDTP`@NFBCF\\FBHCJ@@VBHFB@j@FPAVH?QlAGTYTKMEO?SKQDEAI[SOQ[UEAG@AGWSMAG@KHKNCEG?MUE@EGE@GEGAD@EL?FHT?HBBBRBDHBFNFf@BFEj@GACNUWECG@SKOBUJW@KME?IQIIKAUp@MVIh@GJ?HINEn@GLCTENKCEGE@IHKCUDId@OR?NCHKLIVIDCHG?QHYE?FI?GDG@G?KEODGAJDCDMBg@OM@CDKKFHEAMF[?MIG@BB[OOQKCM@EEYKQHEEM?KDKA@GCAKBSN]DY?KGU?EB[BIKKFE?C@QNFCK?MOG?EGKCk@]IICOGKI@KGUQCGYUOCQY[[",
+            "starred": false,
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/IYEDSV3OKAXYFGUXBWO7MKHEBB2SOILXLW2HD3N7SDFUN3ZCWXMIXDVH5WCZ6AF3IZ3BKZ3VU4MZ7ORTRJWA====",
+            "local_legend_enabled": true
+        },
+        {
+            "id": 4066162,
+            "resource_state": 2,
+            "name": "Passeggiata Sant'Osvaldo Climb",
+            "climb_category": 0,
+            "climb_category_desc": "NC",
+            "avg_grade": 7.6,
+            "start_latlng": [
+                46.511063,
+                11.3528
+            ],
+            "end_latlng": [
+                46.509163,
+                11.356539
+            ],
+            "elev_difference": 52.0,
+            "distance": 683.0,
+            "points": "ce{zG_jhdABWXkADa@Xi@RULIFGBGE?KJ@GTWE?CB?FBCDOKCLO`@_ARY^q@LEXLHLL@AISUKa@B?TJTDUg@HDF?AIIKBOCG?KDQh@s@FEH?R@TOBG[FGCAGBEXIUGNQVKCE]ABIDGNEBESLBEVKXSECa@HBE",
+            "starred": false,
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/H6N7X5SWMQHC5K57Z37XDGDD3LLKHEALQ45SVV3WQL2MUVVZ35GSFGVQBQP3C7GYAQGCGJNSGYKLSX7DW63RC===",
+            "local_legend_enabled": true
+        },
+        {
+            "id": 10609612,
+            "resource_state": 2,
+            "name": "pte Resia pte briscola ",
+            "climb_category": 0,
+            "climb_category_desc": "NC",
+            "avg_grade": -0.5,
+            "start_latlng": [
+                46.481799,
+                11.322171
+            ],
+            "end_latlng": [
+                46.476343,
+                11.313539
+            ],
+            "elev_difference": 4.6,
+            "distance": 903.2,
+            "points": "enuzGqjbdAD?JHnAjC`A`CbBxCpCvFfDpHlAfBpAzBt@pAjAbCpAvBhAhB`AfA",
+            "starred": false,
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/YJWIJHFMJMMRCZ6BT2T5TKOI2IEKNM4V32X63XV4CWQS7DATTORBZ77DQILTKNXYG7SNZOZM7E5YBT375SQZK===",
+            "local_legend_enabled": true
+        },
+        {
+            "id": 10670237,
+            "resource_state": 2,
+            "name": "via rafenstein climb",
+            "climb_category": 2,
+            "climb_category_desc": "3",
+            "avg_grade": 17.4,
+            "start_latlng": [
+                46.514261,
+                11.352981
+            ],
+            "end_latlng": [
+                46.525281,
+                11.356617
+            ],
+            "elev_difference": 257.2,
+            "distance": 1473.2,
+            "points": "cy{zGckhdAa@EwAHQAQOa@u@[_@GMu@k@WBKF]Ze@LOAWIO?WQWAKIGAMLS\\YXYRODa@^_@XIBGHa@PIAUIc@HE?OMa@GMGC?SMMSc@WIKK_@Ci@EU@UI_AGQKK[GU?oAXQCME[QGIa@UYE_@Mg@B{@e@KAm@F_@Qi@?UIu@M[Mo@EOEy@]c@M[S{@WYO[_@IQOk@Ik@M}AGWQYa@[SCe@FKLE`@Md@ITEBE@]OIBMN",
+            "starred": false,
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/FRQQDGHRU44UTTG7HAW57TV5HDXBTYLUCVJ6YASOCFSLVBBSXZWFQJTI7XMCC55KXQTZUTJLE7ANCWP5HYLHS===",
+            "local_legend_enabled": true
+        },
+        {
+            "id": 2895653,
+            "resource_state": 2,
+            "name": "Museion",
+            "climb_category": 0,
+            "climb_category_desc": "NC",
+            "avg_grade": 1.2,
+            "start_latlng": [
+                46.49556839838624,
+                11.34692195802927
+            ],
+            "end_latlng": [
+                46.503121918067336,
+                11.347232423722744
+            ],
+            "elev_difference": 10.0,
+            "distance": 852.1,
+            "points": "gdxzGgegdAi@^k@By@G_AWc@Bq@VgCh@YNi@NQ?o@P}@Hu@CwBWoBIY@WKaAC[Bw@AcA[i@Gk@?c@K_A[a@WMAo@[q@O",
+            "starred": false,
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/VBM36CI2JEEOXV4PEK2MRGVONTRWJIXCRYXYZ6YRKUZE6GLK2F2KD4RBUFP7YQX7IYB4JWDCC3NQLGMYP3DQ====",
+            "local_legend_enabled": true
+        },
+        {
+            "id": 17938004,
+            "resource_state": 2,
+            "name": "Moosbauer - Noafer (11B uphill)",
+            "climb_category": 3,
+            "climb_category_desc": "2",
+            "avg_grade": 19.8,
+            "start_latlng": [
+                46.502447,
+                11.302464
+            ],
+            "end_latlng": [
+                46.511584,
+                11.300739
+            ],
+            "elev_difference": 478.0,
+            "distance": 2420.0,
+            "points": "goyzGko~cAKEc@s@eA{AQOi@Te@EI@a@GaA]KACXQB]QKOKKMAOMSg@AAO@OfAAd@E@IEOQIAE`AETB`@K~@C~@BLCd@Lf@HNE`@YfASh@YZCNCZ@pAGf@Wb@ONUFGn@O@C]@_AEw@Gc@]aAMw@Cg@Qm@?g@S_AKiAIUAo@Qm@KqAG[[gAQ]Uw@?eAEcAYuAGKQOW_@e@_A[Yc@Ho@@_@SIe@Ka@IIW@YO]y@A?Mp@?TF`@Cf@IPi@WCf@HTABWHo@KQAL^Dp@IPMNQh@MJIXIf@Ub@i@t@c@`@AB@l@YPc@\\[Rw@R_@Dn@?RLd@Ad@L\\AXMPEj@ETGh@ITXCDOJUH]d@IXeAnB[b@URINC\\M\\MPg@Za@`@a@l@KZ",
+            "starred": false,
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/M6GEJGFD3TJ6JB7TAFADMYE3HFT4Y2L5BIHLDQFALQRGBCMAE5CQCG6EVW2PWBE6QRWTAIUOSKYY4G5XVVXA====",
+            "local_legend_enabled": true
+        },
+        {
+            "id": 2451728,
+            "resource_state": 2,
+            "name": "Via Del Bosco, 7 Climb",
+            "climb_category": 0,
+            "climb_category_desc": "NC",
+            "avg_grade": 7.6,
+            "start_latlng": [
+                46.5267095,
+                11.3975576
+            ],
+            "end_latlng": [
+                46.5285735,
+                11.4034248
+            ],
+            "elev_difference": 41.5,
+            "distance": 547.7,
+            "points": "}f~zGuaqdAYu@OWGc@IQUUOMS_AMYK_@MOSGMMEU?WBeACY?}B@_AF{AAu@MuADACA?s@E][a@KS_@e@AE_@[KWIE?MEG]Q",
+            "starred": false,
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/ZNEWKWOGV5IZ3ZYCUBVQI623FKAKQLAC2JUQ4V2HXD4RCQ6FL4XNJSSGD45LUKMJRAHLASAUAP5FO7G34C2Q====",
+            "local_legend_enabled": true
+        },
+        {
+            "id": 22185230,
+            "resource_state": 2,
+            "name": "Ponte di ferro -> fiocco rosso (arrivo)",
+            "climb_category": 0,
+            "climb_category_desc": "NC",
+            "avg_grade": 2.6,
+            "start_latlng": [
+                46.482645,
+                11.303722
+            ],
+            "end_latlng": [
+                46.476165,
+                11.289946
+            ],
+            "elev_difference": 52.4,
+            "distance": 2011.0,
+            "points": "osuzGgw~cAXhAF^Fn@Bt@?pAKbBB~AAhBD`BA\\Bt@D\\Jx@H\\Zv@NPf@`@XZ^VZLXDV@j@Cx@Yd@YZ[PQ\\m@VUl@eAp@oBZe@NQJYxDaFPKr@Kd@Dt@N`@Pf@Xh@f@fAtBBPCjADh@Oj@?j@z@dItAjHJtA?~@Eh@SpBc@fD@RBLFBPIDF?Ru@hEWnE?\\^tD@dACdA",
+            "starred": false,
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/SE6VQHQNQ5UURIEF6YTS67SOTTATK4MLNCMKBSLYQPHQWYAQM6AHDPWNF47NK7K5KBGGBILSSPZQFVCK62XTO===",
+            "local_legend_enabled": true
+        }
+    ]
+}
