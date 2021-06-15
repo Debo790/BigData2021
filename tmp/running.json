@@ -1,223 +1,223 @@
 {
     "segments": [
         {
-            "id": 13413524,
+            "id": 7033065,
             "resource_state": 2,
-            "name": "Colle Vertical Sportler",
-            "climb_category": 4,
-            "climb_category_desc": "1",
-            "avg_grade": 34.9,
-            "start_latlng": [
-                46.490692,
-                11.368675
-            ],
-            "end_latlng": [
-                46.478361,
-                11.36916
-            ],
-            "elev_difference": 783.7,
-            "distance": 2235.9,
-            "points": "yewzGemkdABEJ@BDHGLBDAFHDBFOA[HBHIBIDBJXHJDNPCDBDEGa@BWDCDDF`@D?T^L@BCDFDABELCHEBFJCR`@JHDND@Tg@D[D?DCDQ@FDAJHDMHK@IAR@FDDFMLQB@FNBBDODRDDP[BAFVBQRVBGB?BGFWLTHK@PD@BEJ@DNRb@DA@QBEJABNHJDADQBCBDHDAR@FL?DMBBFMDB@HDCL[Jh@AXHIFNBEBc@D@BEDY@HDC@FAHDADMBFLA@R@DTQ?HF?JIJ@DAIZDNAHDEL_@DABB@RKZCPD@?HDAHI@GV[C_@BQFYFIJp@N[LNDCXe@@F?XDE@GBCBDDABNCNBIHI@IV[BXCXN[DC@PDE?IDD@t@D?DWJIB[BDD??LLQR@BCAFBEJCBCBFDCBLB`@DAHMHEDA@HBATy@JBJEH`@FEDY@mACSDCFZ?XHVDA@E?HBCFKDBDMDND@DEBD?HJGFKBDDa@HLBPBQBFDC@YD@JRJh@HG@GNBBGr@EB@LCJBHKJANHJABEAUJQHLDCR@ZGRPF@R@LGNDL?D@PGX@JHRBTGRKVHVPDMHEJLRGJ?JGJ@PKDBDNBBLALBRKJ?JCJBXAj@I^@p@KDDHXTPTJDCGMD@AKDED??I",
-            "starred": false,
-            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/7YSMFNTUHYTLI5POLSKUHL7PLAL7EDF34FCVKFBGFYLNLXUSZG23TBGDMTNAM6GLFKKUBQKJ25VJEPKMDRFV4===",
-            "local_legend_enabled": true
-        },
-        {
-            "id": 7960988,
-            "resource_state": 2,
-            "name": "Rencio-Soprabolzano (fine sentiero 6)",
-            "climb_category": 5,
-            "climb_category_desc": "HC",
-            "avg_grade": 20.6,
-            "start_latlng": [
-                46.501055,
-                11.365583
-            ],
-            "end_latlng": [
-                46.521045,
-                11.394618
-            ],
-            "elev_difference": 819.6,
-            "distance": 3981.2,
-            "points": "qfyzG{yjdAQg@A]GWAm@Qm@O}Ak@sAWgAM[EQGcAk@mBIs@Oq@Ay@IWAq@Dk@FS@g@I_A?SKc@F_@?UIc@Ho@QK]IWKa@Uu@}@Uc@EMCm@Da@Ck@L{@?eAC[YiA]m@So@OWQMa@e@OiACMGGBSXu@@S?cAESIMIBGNGDCCCKA]Fu@BcAI{BGOIIE?MJAIF{@MoAAg@W{@CyAIy@Im@CaAKy@GSWkBMm@GcAMg@AYKe@m@uB]oBUy@GsAMc@Q{@oA_COSy@m@o@{@GA_@?]Dm@PE?QKS[EQc@y@o@q@i@c@YQYGKA@HLJ@NE@MEQCS@QKc@CIOMFQLW@ORQDWIEBOSMIy@GUG[MWG_@WMCMIIAYDOHo@z@[Rg@PKPIBGAWIOMa@Ek@DY?Sa@e@a@Yw@QQMUCKEKUMSEWOc@Kc@SISCUYoAGOo@k@QSSg@KMSOGMUYEAM@GAWFM?ILUHCE?[My@i@u@I@GDEPE@ETAXMLGNGt@IXMNUFKIIQI{@]o@QOKEKYKK[@e@e@IWSGWUMAc@K]EKFQR[PWFKGOQGSU}AYaAEm@Mq@QSy@e@GAISc@QEDGAQIKKYAGEIMYs@Q}@O_@GYUQMQ[m@IYa@k@[WE?IMEBKVK?EL",
-            "starred": false,
-            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/OEI7NWG527B32CYLYOWBXBQK4VMBK3FYC6OXG7EFRSL4HQRASRLWZDZRA6Y5J24CZHFK64SZLE7HWE2ZWX7A====",
-            "local_legend_enabled": true
-        },
-        {
-            "id": 5857880,
-            "resource_state": 2,
-            "name": "S. Genesio Climb 3",
-            "climb_category": 2,
-            "climb_category_desc": "3",
-            "avg_grade": 15.9,
-            "start_latlng": [
-                46.520578,
-                11.340103
-            ],
-            "end_latlng": [
-                46.528033,
-                11.336703
-            ],
-            "elev_difference": 243.0,
-            "distance": 1529.1,
-            "points": "q`}zGszedAIPEDKEUNCHa@HW?GIAN@NVrABTDADFDTP`@NFBCF\\FBHCJ@@VBHFB@j@FPAVH?QlAGTYTKMEO?SKQDEAI[SOQ[UEAG@AGWSMAG@KHKNCEG?MUE@EGE@GEGAD@EL?FHT?HBBBRBDHBFNFf@BFEj@GACNUWECG@SKOBUJW@KME?IQIIKAUp@MVIh@GJ?HINEn@GLCTENKCEGE@IHKCUDId@OR?NCHKLIVIDCHG?QHYE?FI?GDG@G?KEODGAJDCDMBg@OM@CDKKFHEAMF[?MIG@BB[OOQKCM@EEYKQHEEM?KDKA@GCAKBSN]DY?KGU?EB[BIKKFE?C@QNFCK?MOG?EGKCk@]IICOGKI@KGUQCGYUOCQY[[",
-            "starred": false,
-            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/IYEDSV3OKAXYFGUXBWO7MKHEBB2SOILXLW2HD3N7SDFUN3ZCWXMIXDVH5WCZ6AF3IZ3BKZ3VU4MZ7ORTRJWA====",
-            "local_legend_enabled": true
-        },
-        {
-            "id": 4066162,
-            "resource_state": 2,
-            "name": "Passeggiata Sant'Osvaldo Climb",
+            "name": "Seconda Riva",
             "climb_category": 0,
             "climb_category_desc": "NC",
-            "avg_grade": 7.6,
+            "avg_grade": -0.1,
             "start_latlng": [
-                46.511063,
-                11.3528
+                45.165108,
+                10.78844
             ],
             "end_latlng": [
-                46.509163,
-                11.356539
+                45.161261,
+                10.803039
             ],
-            "elev_difference": 52.0,
-            "distance": 683.0,
-            "points": "ce{zG_jhdABWXkADa@Xi@RULIFGBGE?KJ@GTWE?CB?FBCDOKCLO`@_ARY^q@LEXLHLL@AISUKa@B?TJTDUg@HDF?AIIKBOCG?KDQh@s@FEH?R@TOBG[FGCAGBEXIUGNQVKCE]ABIDGNEBESLBEVKXSECa@HBE",
+            "elev_difference": 10.1,
+            "distance": 1319.7,
+            "points": "{htrGwbz`AWsC@e@AKe@yABIBeAE]GiDMu@OmB@oBLaBFe@f@qB^}BTa@Xq@\\e@t@{@x@mAn@qAjAoCh@eBN[TaA\\s@`AyC^aAPk@t@aBPg@v@aBRq@LWZ_@P_@RuAFq@Jm@Ba@UmB",
             "starred": false,
-            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/H6N7X5SWMQHC5K57Z37XDGDD3LLKHEALQ45SVV3WQL2MUVVZ35GSFGVQBQP3C7GYAQGCGJNSGYKLSX7DW63RC===",
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/MBL24I2GF4EZ44EXZIY2L54L5BBJWDFBGVNVKCH6OULU5ZU5V4YXTMSLNJIXMWI7SXB7CP5ZFTNNRQSUZDCA====",
             "local_legend_enabled": true
         },
         {
-            "id": 10609612,
+            "id": 16105810,
             "resource_state": 2,
-            "name": "pte Resia pte briscola ",
+            "name": "Belfiore - Zanzara",
+            "climb_category": 0,
+            "climb_category_desc": "NC",
+            "avg_grade": -0.4,
+            "start_latlng": [
+                45.156278,
+                10.771436
+            ],
+            "end_latlng": [
+                45.163955,
+                10.788322
+            ],
+            "elev_difference": 8.5,
+            "distance": 1707.8,
+            "points": "uqrrGmxv`AMkCKkACiAKuAAw@GkAAk@Ee@Kc@Gq@@uBOmDYsBGw@M[Su@Se@UaAUg@aAwCi@mAs@wCa@wDS{@s@wBaAiCc@sAQYa@gBuAeEmAaDq@kAKMw@a@kB]c@Ss@e@_@c@Wi@c@qAc@cAGKm@k@g@Sk@McAEmAQ",
+            "starred": false,
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/EEK33LO5DCVXKT64GAZ35KQ2ZXKZF3VSHCDYOW4J5SCYRJTNWGB5P7B5TABRR6XDGWQDJSEMBWYFYWQDALZDG===",
+            "local_legend_enabled": true
+        },
+        {
+            "id": 16530500,
+            "resource_state": 2,
+            "name": "Controviale lago di mezzo",
+            "climb_category": 0,
+            "climb_category_desc": "NC",
+            "avg_grade": -0.9,
+            "start_latlng": [
+                45.162072,
+                10.79952
+            ],
+            "end_latlng": [
+                45.165074,
+                10.789325
+            ],
+            "elev_difference": 12.0,
+            "distance": 987.2,
+            "points": "}usrG_h|`A[j@[t@s@nBk@rAu@xBwDjJw@nAYTwAx@QZY~@s@~DEpAMdB?z@Fd@DRRRHXHJXTXZZx@R`@Fd@G`BCN_@vA[v@MP",
+            "starred": false,
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/FCGZM6I5ZXHR6M2LT4DZU5SHHORDBZDURNOZK33IV45ZO2JQ2N6Q6WME5IXGNASQ7OIDDEXJHP5VJVQRO3GQ====",
+            "local_legend_enabled": true
+        },
+        {
+            "id": 22914248,
+            "resource_state": 2,
+            "name": "Segmento FALLICO n\u00b03",
+            "climb_category": 0,
+            "climb_category_desc": "NC",
+            "avg_grade": 0.8,
+            "start_latlng": [
+                45.154871,
+                10.798695
+            ],
+            "end_latlng": [
+                45.152614,
+                10.799227
+            ],
+            "elev_difference": 3.2,
+            "distance": 280.8,
+            "points": "}hrrGyb|`AAXBLXLd@HZMRYr@Gn@[`BYjCcA",
+            "starred": false,
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/72EOTFEUPXTUPKVQ6QZL3LQJXGWEOMP4YJ65WPERD64QIJPWS47JNDFYZYCFQNWPKJWFIMCNAI62TFPSDFDQ====",
+            "local_legend_enabled": true
+        },
+        {
+            "id": 8110114,
+            "resource_state": 2,
+            "name": "Canotriathlon 500m",
+            "climb_category": 0,
+            "climb_category_desc": "NC",
+            "avg_grade": 0.8,
+            "start_latlng": [
+                45.1776,
+                10.777623
+            ],
+            "end_latlng": [
+                45.179277,
+                10.771973
+            ],
+            "elev_difference": 6.0,
+            "distance": 505.1,
+            "points": "_wvrGc_x`A[bBwAhEQr@o@pEAbAJ|B?`@MdBOp@Sn@k@pAWXk@\\",
+            "starred": false,
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/T5DUC5Q2IYUBPXLLVCVPU5GKQAUDKP2HY44R2KPCQVIMADYZ2OGLVD5AXQAJW7IQOO7US65MA2Y56ZEPQP57C===",
+            "local_legend_enabled": true
+        },
+        {
+            "id": 8578856,
+            "resource_state": 2,
+            "name": "Zappa's revenge",
+            "climb_category": 0,
+            "climb_category_desc": "NC",
+            "avg_grade": 0.1,
+            "start_latlng": [
+                45.16766,
+                10.787433
+            ],
+            "end_latlng": [
+                45.172644,
+                10.783228
+            ],
+            "elev_difference": 6.0,
+            "distance": 846.7,
+            "points": "{xtrGm|y`Ag@BsBTU?aCZ}D|@aAXg@HMC]?WJKJGPCpDGbAQXw@Fs@PmBPgAH_@@[DKHCFBf@vAbG",
+            "starred": false,
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/DIXHUIJGHJ7SG4LWMPA6MEJ5OOTZODLM6SSIRCXCA4FSNOWZHNWAJQL3RI7SMEG3C4FEV3VQ7AGUQ4MXCHNXQ===",
+            "local_legend_enabled": true
+        },
+        {
+            "id": 24342930,
+            "resource_state": 2,
+            "name": "Bosco Virgiliano 500m (verso ovest)",
             "climb_category": 0,
             "climb_category_desc": "NC",
             "avg_grade": -0.5,
             "start_latlng": [
-                46.481799,
-                11.322171
+                45.14202,
+                10.801137
             ],
             "end_latlng": [
-                46.476343,
-                11.313539
+                45.143933,
+                10.795523
             ],
-            "elev_difference": 4.6,
-            "distance": 903.2,
-            "points": "enuzGqjbdAD?JHnAjC`A`CbBxCpCvFfDpHlAfBpAzBt@pAjAbCpAvBhAhB`AfA",
+            "elev_difference": 4.4,
+            "distance": 496.9,
+            "points": "sxorGar|`AWt@kApFYr@Sr@u@zDc@pBUp@q@lDi@vBYbAEF",
             "starred": false,
-            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/YJWIJHFMJMMRCZ6BT2T5TKOI2IEKNM4V32X63XV4CWQS7DATTORBZ77DQILTKNXYG7SNZOZM7E5YBT375SQZK===",
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/CMDZUGVLVZKN54TOAMKZGVBGIYMCWDB3RFWZHBGD6LGHQ36GCWGZPOXL5P567DU7F3LTSUMPBI2SXLVKHG4XK===",
             "local_legend_enabled": true
         },
         {
-            "id": 10670237,
+            "id": 26345838,
             "resource_state": 2,
-            "name": "via rafenstein climb",
-            "climb_category": 2,
-            "climb_category_desc": "3",
-            "avg_grade": 17.4,
-            "start_latlng": [
-                46.514261,
-                11.352981
-            ],
-            "end_latlng": [
-                46.525281,
-                11.356617
-            ],
-            "elev_difference": 257.2,
-            "distance": 1473.2,
-            "points": "cy{zGckhdAa@EwAHQAQOa@u@[_@GMu@k@WBKF]Ze@LOAWIO?WQWAKIGAMLS\\YXYRODa@^_@XIBGHa@PIAUIc@HE?OMa@GMGC?SMMSc@WIKK_@Ci@EU@UI_AGQKK[GU?oAXQCME[QGIa@UYE_@Mg@B{@e@KAm@F_@Qi@?UIu@M[Mo@EOEy@]c@M[S{@WYO[_@IQOk@Ik@M}AGWQYa@[SCe@FKLE`@Md@ITEBE@]OIBMN",
-            "starred": false,
-            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/FRQQDGHRU44UTTG7HAW57TV5HDXBTYLUCVJ6YASOCFSLVBBSXZWFQJTI7XMCC55KXQTZUTJLE7ANCWP5HYLHS===",
-            "local_legend_enabled": true
-        },
-        {
-            "id": 2895653,
-            "resource_state": 2,
-            "name": "Museion",
+            "name": "Via di Gas!",
             "climb_category": 0,
             "climb_category_desc": "NC",
-            "avg_grade": 1.2,
+            "avg_grade": -0.1,
             "start_latlng": [
-                46.49556839838624,
-                11.34692195802927
+                45.135122,
+                10.728027
             ],
             "end_latlng": [
-                46.503121918067336,
-                11.347232423722744
+                45.13171,
+                10.727029
             ],
-            "elev_difference": 10.0,
-            "distance": 852.1,
-            "points": "gdxzGgegdAi@^k@By@G_AWc@Bq@VgCh@YNi@NQ?o@P}@Hu@CwBWoBIY@WKaAC[Bw@AcA[i@Gk@?c@K_A[a@WMAo@[q@O",
+            "elev_difference": 0.5,
+            "distance": 446.9,
+            "points": "omnrGcin`ARG^HzAt@t@XlAp@RDNGHQRsAHSFIRAn@Rj@ZbAb@ZThAd@`@\\DL?N",
             "starred": false,
-            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/VBM36CI2JEEOXV4PEK2MRGVONTRWJIXCRYXYZ6YRKUZE6GLK2F2KD4RBUFP7YQX7IYB4JWDCC3NQLGMYP3DQ====",
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/EWVEFOJBGSV7VT3H37J2P7RE4HZFMEKCX2DIYMDGKA2UYVAZNTURWLR6C5HWYQJCIOPQMSRAHJZ2PFWEWN3A====",
             "local_legend_enabled": true
         },
         {
-            "id": 17938004,
+            "id": 20614310,
             "resource_state": 2,
-            "name": "Moosbauer - Noafer (11B uphill)",
-            "climb_category": 3,
-            "climb_category_desc": "2",
-            "avg_grade": 19.8,
-            "start_latlng": [
-                46.502447,
-                11.302464
-            ],
-            "end_latlng": [
-                46.511584,
-                11.300739
-            ],
-            "elev_difference": 478.0,
-            "distance": 2420.0,
-            "points": "goyzGko~cAKEc@s@eA{AQOi@Te@EI@a@GaA]KACXQB]QKOKKMAOMSg@AAO@OfAAd@E@IEOQIAE`AETB`@K~@C~@BLCd@Lf@HNE`@YfASh@YZCNCZ@pAGf@Wb@ONUFGn@O@C]@_AEw@Gc@]aAMw@Cg@Qm@?g@S_AKiAIUAo@Qm@KqAG[[gAQ]Uw@?eAEcAYuAGKQOW_@e@_A[Yc@Ho@@_@SIe@Ka@IIW@YO]y@A?Mp@?TF`@Cf@IPi@WCf@HTABWHo@KQAL^Dp@IPMNQh@MJIXIf@Ub@i@t@c@`@AB@l@YPc@\\[Rw@R_@Dn@?RLd@Ad@L\\AXMPEj@ETGh@ITXCDOJUH]d@IXeAnB[b@URINC\\M\\MPg@Za@`@a@l@KZ",
-            "starred": false,
-            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/M6GEJGFD3TJ6JB7TAFADMYE3HFT4Y2L5BIHLDQFALQRGBCMAE5CQCG6EVW2PWBE6QRWTAIUOSKYY4G5XVVXA====",
-            "local_legend_enabled": true
-        },
-        {
-            "id": 2451728,
-            "resource_state": 2,
-            "name": "Via Del Bosco, 7 Climb",
+            "name": "oratorio - san silvetro (via punte)",
             "climb_category": 0,
             "climb_category_desc": "NC",
-            "avg_grade": 7.6,
+            "avg_grade": 0.1,
             "start_latlng": [
-                46.5267095,
-                11.3975576
+                45.117206,
+                10.742482
             ],
             "end_latlng": [
-                46.5285735,
-                11.4034248
+                45.128089,
+                10.750283
             ],
-            "elev_difference": 41.5,
-            "distance": 547.7,
-            "points": "}f~zGuaqdAYu@OWGc@IQUUOMS_AMYK_@MOSGMMEU?WBeACY?}B@_AF{AAu@MuADACA?s@E][a@KS_@e@AE_@[KWIE?MEG]Q",
+            "elev_difference": 2.4,
+            "distance": 1385.1,
+            "points": "o}jrGocq`AGSOEUS{@gAm@Uq@m@YOUYk@_@UKo@i@YGoBiA_@c@q@e@e@e@IGYIi@g@]U[MUOs@]kAa@]EUKaAs@e@e@aCyAaA_A]c@w@s@u@cAa@a@OIOUYSOGSAK@SG_Ag@[Oq@COGs@MWKs@c@]i@QEWOGQk@Ya@_@G@YWQGUUQCQIa@WMCMD",
             "starred": false,
-            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/ZNEWKWOGV5IZ3ZYCUBVQI623FKAKQLAC2JUQ4V2HXD4RCQ6FL4XNJSSGD45LUKMJRAHLASAUAP5FO7G34C2Q====",
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/2BNKCVIVWOQ6VNZFYVZTJOSNODNXY5PWAPTTR2A5ANJD3ELO7YD7SBIUD76AFCXOTE6UIRR4LEF3OEEJ2JAA====",
             "local_legend_enabled": true
         },
         {
-            "id": 22185230,
+            "id": 22304269,
             "resource_state": 2,
-            "name": "Ponte di ferro -> fiocco rosso (arrivo)",
+            "name": "Cavalcavia autostrada ",
             "climb_category": 0,
             "climb_category_desc": "NC",
-            "avg_grade": 2.6,
+            "avg_grade": 2.4,
             "start_latlng": [
-                46.482645,
-                11.303722
+                45.183051,
+                10.852545
             ],
             "end_latlng": [
-                46.476165,
-                11.289946
+                45.182418,
+                10.849304
             ],
-            "elev_difference": 52.4,
-            "distance": 2011.0,
-            "points": "osuzGgw~cAXhAF^Fn@Bt@?pAKbBB~AAhBD`BA\\Bt@D\\Jx@H\\Zv@NPf@`@XZ^VZLXDV@j@Cx@Yd@YZ[PQ\\m@VUl@eAp@oBZe@NQJYxDaFPKr@Kd@Dt@N`@Pf@Xh@f@fAtBBPCjADh@Oj@?j@z@dItAjHJtA?~@Eh@SpBc@fD@RBLFBPIDF?Ru@hEWnE?\\^tD@dACdA",
+            "elev_difference": 8.0,
+            "distance": 265.2,
+            "points": "aywrGksfaAb@hGzA|J",
             "starred": false,
-            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/SE6VQHQNQ5UURIEF6YTS67SOTTATK4MLNCMKBSLYQPHQWYAQM6AHDPWNF47NK7K5KBGGBILSSPZQFVCK62XTO===",
+            "elevation_profile": "https://d3o5xota0a1fcr.cloudfront.net/v6/charts/2SPUUJMAHH5GF52WN2XWCA4V75G64YTGTOO4R66UP6UWVNV2Z5ZKLB2X2QQYFBOGOIHMPYL24VWYLLZPT6NA====",
             "local_legend_enabled": true
         }
     ]

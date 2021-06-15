@@ -2,7 +2,6 @@ import argparse
 import time
 from typing import List
 import geopandas as gpd
-from geopandas.geodataframe import GeoDataFrame
 from osm2geojson.helpers import overpass_call
 from osm2geojson.main import json2geojson
 from shapely import affinity
@@ -12,8 +11,8 @@ from strava_auth import StravaAuth
 
 
 
-def get_coords(boundary: GeoDataFrame) -> List:
-        env = boundary.geometry[0].envelope
+def get_coords(boundary: List, city: int) -> List:
+        env = boundary.geometry[city].envelope
         g = [i for i in env.exterior.coords]
         coords = []
         coords.append(g[0][0])  # lower bound x
@@ -24,13 +23,13 @@ def get_coords(boundary: GeoDataFrame) -> List:
         return coords
 
 class StravaExtractor:
-    def __init__(self, city: str) -> None:
+    def __init__(self, city: List) -> None:
         self.city = city
-        self.boundary = None
+        self.boundary = gpd.GeoDataFrame()
 
-    def get_boundary(self):
+    def get_boundary(self, city: str):
 
-        print("Getting boundaries for {}".format(self.city))
+        print("Getting boundaries for {}".format(city))
 
         query = '''
             [out:json];
@@ -39,23 +38,23 @@ class StravaExtractor:
             rel(pivot.target)(area.wrap);
 
             out geom;
-        '''.format(self.city)
+        '''.format(city)
 
         ti = time.time()
         
         result = overpass_call(query)
         res = json2geojson(result)
-        self.boundary = gpd.GeoDataFrame.from_features(res)
+        self.boundary = self.boundary.append(gpd.GeoDataFrame.from_features(res), ignore_index=True)
         
         if len(self.boundary) <= 0:
-            raise ConnectionError("No boundaries were found for {}. Try with another city or check your Overpass query limit.".format(self.city))
+            raise ConnectionError("No boundaries were found for {}. Try with another city or check your Overpass query limit.".format(city))
         else:
             tf = time.time()
-            print("Extracted boundaries for {}. Time elapsed: {} s".format(self.city, round(tf-ti, 2)))        
+            print("Extracted boundaries for {}. Time elapsed: {} s".format(city, round(tf-ti, 2)))        
     
-    def get_segments(self, auth: StravaAuth, activity_type: str):
+    def get_segments(self, auth: StravaAuth, activity_type: str, city: int):
         print("Searching for {} segments...".format(activity_type))
-        coords = get_coords(self.boundary)
+        coords = get_coords(self.boundary, city)
         bounds = "{},{},{},{}".format(coords[1], coords[0],coords[3], coords[2])
         params = {'activity_type':activity_type, 'bounds': bounds}
         r = open('conf/auth.json','r')
@@ -72,20 +71,24 @@ class StravaExtractor:
                 json.dump(req.json(), f, indent=4)
     
     def run(self) -> bool:
+        # Check for access_token, updating it if expired
         auth = StravaAuth()
         #print(auth.token())
-        self.get_boundary()
-        ti = time.time()
-        self.get_segments(auth, "running")
-        print("Found running segments for {}. Time elapsed: {} s".format(self.city, round(ti-time.time(), 2)))
-        ti = time.time()
-        self.get_segments(auth, "riding")
-        print("Found riding segments for {}. Time elapsed: {} s".format(self.city, round(ti-time.time(), 2)))
+        for city in self.city:
+            self.get_boundary(city)
+            ti = time.time()
+            self.get_segments(auth, "running", self.city.index(city))
+            print("Found running segments for {}. Time elapsed: {} s".format(city, round(ti-time.time(), 2)))
+            ti = time.time()
+            self.get_segments(auth, "riding", self.city.index(city))
+            print("Found riding segments for {}. Time elapsed: {} s".format(city, round(ti-time.time(), 2)))
+            print("Waiting 10s to not overload Overpass...")
+            time.sleep(10)
         return True
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="BDT Project 2021 - Strava data extraction")
-    parser.add_argument("--city", type=str, help="The city to extract", required=True)
+    parser.add_argument("--city", nargs='+', type=str, help="The city to extract", required=True)
 
     args = parser.parse_args()
 

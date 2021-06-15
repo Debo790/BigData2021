@@ -14,7 +14,7 @@ class StravaAuth:
             self.refresh_token = auth["refresh_token"]
             self.expiresAt = auth["expires_at"]
         else:
-            print(auth["refresh_token"])
+            #print(auth["refresh_token"])
             self.update(auth["refresh_token"])
         
     def update(self, refresh_token):

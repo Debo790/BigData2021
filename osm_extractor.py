@@ -1,3 +1,4 @@
+from typing import List
 import geopandas as gpd
 from geopandas.geodataframe import GeoDataFrame
 from osm2geojson.helpers import overpass_call
@@ -8,14 +9,14 @@ import time
 
 class CityExtractor:
 
-    def __init__(self, city:str):
+    def __init__(self, city:List):
         self.city = city
         self.items = None
         #self.boundary = None
 
-    def extract(self):
+    def extract(self, city):
         
-        print("Extracting nwr and routes for {}".format(self.city))
+        print("Extracting nwr and routes for {}".format(city))
 
         # nwr stays for "node, ways and relation"
         # every item with a sport tag is included
@@ -37,39 +38,40 @@ class CityExtractor:
             relation["route"="hiking"](area.searchArea)->.all;
             (.all; - .remove;);
             out geom qt;
-            '''.format(self.city)
+            '''.format(city)
 
         ti = time.time()
         result = overpass_call(myquery)
         res = xml2geojson(result)
         self.items = gpd.GeoDataFrame.from_features(res)
         if len(self.items) <= 0:
-            raise ConnectionError("No items were found for {}. Try with another city or check your Overpass query limit.".format(self.city))
+            raise ConnectionError("No items were found for {}. Try with another city or check your Overpass query limit.".format(city))
         else:
 
             tf = time.time()
-            print("Extracted {} elements for {}. Time elapsed: {} s".format(len(self.items), self.city, round(tf-ti, 2)))
+            print("Extracted {} elements for {}. Time elapsed: {} s".format(len(self.items), city, round(tf-ti, 2)))
     
-    def update(self):
+    def update(self, city):
         # Update Redis
-        print("Redis updating...")
+        print("Redis updating for {}...".format(city))
 
-    def load(self):
+    def load(self, city):
         #Upload to DB
-        print("Uploading to DB...")
+        print("Uploading to DB entries for {}...".format(city))
 
     def run(self) -> bool:
-        self.extract()
-        #self.get_boundary()
-        self.update()
-        self.load()
+        for city in self.city:
+            self.extract(city)
+            #self.get_boundary()
+            self.update(city)
+            self.load(city)
         return True
 
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="BDT Project 2021 - OSM data extraction")
-    parser.add_argument("--city", type=str, help="the city to extract", required=True)
+    parser.add_argument("--city", nargs='+', type=str, help="the city to extract", required=True)
 
     args = parser.parse_args()
 
