@@ -9,13 +9,12 @@ First running tips, improvements to this readme will follow.
 Run the following command:
 
 ```
-python3 -W ignore osm_extractor.py --city [insert city]
+python3 -W ignore osm_extractor.py --city [insert city/cities]
 ```
 
 Data will be stored in a GeoDataFrame (in a DB in a while). Easy to analyse in a Notebook at the moment.
 
 Next steps: 
-- Input of cities in a list format
 - DB upload and configuration
 - (Redis?)
 
@@ -24,7 +23,7 @@ Next steps:
 Run the following command:
 
 ```
-python3 -W ignore strava_extractor.py --city [insert city]
+python3 -W ignore strava_extractor.py --city [insert city/cities]
 ```
 
 Data will be stored in tmp/running.json and tmp/riding.json. At the moment only the first iteration is available. Multi-iteration over the city will be available soon.
