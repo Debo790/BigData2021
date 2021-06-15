@@ -1,0 +1,6 @@
+geopandas
+osm2geojson
+shapely
+psycopg2
+sqlalchemy
+geoalchemy2
