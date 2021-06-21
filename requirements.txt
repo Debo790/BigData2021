@@ -1,4 +1,5 @@
 numpy
+pandas
 geopandas
 osm2geojson
 shapely
