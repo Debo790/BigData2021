@@ -23,15 +23,15 @@ Next steps:
 Run the following command:
 
 ```
-python3 -W ignore strava_extractor.py --city [insert city/cities]
+python3 -W ignore strava_extractor.py --city [insert city/cities] --activity [riding/running/all]
 ```
 
-Data will be stored in tmp/running.json and tmp/riding.json. At the moment only the first iteration is available. Multi-iteration over the city will be available soon.
+Data are not perfectly stored (for the moment) in tmp/running.json and tmp/riding.json. Segments' data are memory-stored in ridesData and runsData, upload in DB is coming. 
+Activity parameter added, it's not required and default is "running". Available options are riding, running and all (riding+running).
+Multiple cities can be passed as parameters, but if too many results are retrieved it can take quite a long time due to Strava limitations.
 
 Configuration data are stored in conf/config.ini and conf/auth.json (private). 
 
 Next steps:
-- Multi-iteration over a city (include all segments available)
-- Segments-scraping to store useful data segments
 - DB upload
 - (Redis?)
