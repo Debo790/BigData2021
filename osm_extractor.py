@@ -6,12 +6,14 @@ from osm2geojson.main import xml2geojson
 from osm2geojson.main import json2geojson
 import argparse
 import time
+from db_wrapper import PostgresDB
 
 class CityExtractor:
 
     def __init__(self, city:List):
         self.city = city
         self.items = None
+        self.db = PostgresDB()
         #self.boundary = None
 
     def extract(self, city):
@@ -47,7 +49,7 @@ class CityExtractor:
         if len(self.items) <= 0:
             raise ConnectionError("No items were found for {}. Try with another city or check your Overpass query limit.".format(city))
         else:
-
+            self.items = self.items.set_crs(epsg=4326)
             tf = time.time()
             print("Extracted {} elements for {}. Time elapsed: {} s".format(len(self.items), city, round(tf-ti, 2)))
     
@@ -58,6 +60,8 @@ class CityExtractor:
     def load(self, city):
         #Upload to DB
         print("Uploading to DB entries for {}...".format(city))
+        self.db.insert_gdf(self.items, "osm")
+        print("Data uploaded for {}.".format(city))
 
     def run(self) -> bool:
         for city in self.city:
