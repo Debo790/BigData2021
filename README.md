@@ -12,10 +12,10 @@ Run the following command:
 python3 -W ignore osm_extractor.py --city [insert city/cities]
 ```
 
-Data will be stored in a GeoDataFrame (in a DB in a while). Easy to analyse in a Notebook at the moment.
+Data are stored in a local DB (Postgres). Easy to analyse in a Notebook at the moment.
 
 Next steps: 
-- DB upload and configuration
+- DB upsert, maybe RDS
 - (Redis?)
 
 ### Strava
@@ -26,12 +26,26 @@ Run the following command:
 python3 -W ignore strava_extractor.py --city [insert city/cities] --activity [riding/running/all]
 ```
 
-Data are not perfectly stored (for the moment) in tmp/running.json and tmp/riding.json. Segments' data are memory-stored in ridesData and runsData, upload in DB is coming. 
+Data are now stored in a local Db (Postgres). 
 Activity parameter added, it's not required and default is "running". Available options are riding, running and all (riding+running).
 Multiple cities can be passed as parameters, but if too many results are retrieved it can take quite a long time due to Strava limitations.
 
 Configuration data are stored in conf/config.ini and conf/auth.json (private). 
 
 Next steps:
-- DB upload
+- DB upsert, maybe RDS
 - (Redis?)
+
+### Demographics
+
+Populations will be stored in a DB. Coming.
+
+### CONI
+
+CONI data will be stored in a DB. Coming.
+
+## Metrics calculation
+
+Metrics should be calculated when retrieved from DB.
+
+They should be stored in a middle-layer DB to be presented to the final user.
