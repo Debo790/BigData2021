@@ -1,8 +1,23 @@
 CREATE TABLE IF NOT EXISTS osm (
-    geometry geometry,
     type varchar(255),
     id bigint NOT NULL,
-    tags text
+    tags text,
+    geometry geometry
+);
+
+CREATE TABLE IF NOT EXISTS segments (
+    id bigint primary key,
+    name varchar, 
+    activity_type varchar(20),
+    effort_count int, 
+    athlete_count int,
+    distance float, 
+    average_grade float, 
+    maximum_grade float, 
+    elevation_high float,
+    elevation_low float, 
+    total_elevation_gain float, 
+    geometry geometry
 );
 
 CREATE TABLE IF NOT EXISTS comuni (

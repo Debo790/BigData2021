@@ -3,15 +3,16 @@ import sys
 import time
 from typing import List
 import geopandas as gpd
-from geopandas.geodataframe import GeoDataFrame
 import numpy as np
 import pandas as pd
 from osm2geojson.helpers import overpass_call
 from osm2geojson.main import json2geojson
-from shapely.geometry import Polygon
+import shapely.geometry as shp
 import requests
 import json
+import polyline
 from strava_auth import StravaAuth
+from db_wrapper import PostgresDB
 
 
 query_counter = 0
@@ -19,7 +20,7 @@ query_counter = 0
 
 # Get coordinates for the envelope of the requested area
 # Returns a list with xmin, ymin, xmax, ymax
-def get_coords(boundary: GeoDataFrame, city: int) -> List:
+def get_coords(boundary: gpd.GeoDataFrame, city: int) -> List:
     env = boundary.geometry[city].envelope
     g = [i for i in env.exterior.coords]
     coords = []
@@ -34,7 +35,6 @@ def get_coords(boundary: GeoDataFrame, city: int) -> List:
         coords.append(g[2][0])  # upper bound x
         coords.append(g[2][1])  # upper bound y
 
-    
     #print(coords)
     return coords
 
@@ -61,9 +61,11 @@ class StravaExtractor:
         self.rides = set()
         self.runsData = None
         self.ridesData = None
+        self.segments = gpd.GeoDataFrame()
+        self.db = PostgresDB()
 
 
-    def reduce_boundary(self, boundary: GeoDataFrame, city: int) -> GeoDataFrame:
+    def reduce_boundary(self, boundary: gpd.GeoDataFrame, city: int) -> gpd.GeoDataFrame:
         coords = get_coords(boundary, city)
         xmin = coords[0]
         ymin = coords[1]
@@ -78,7 +80,7 @@ class StravaExtractor:
         polygons = []
         for x in cols[:-1]:
             for y in rows[:-1]:
-                polygons.append(Polygon([(x,y), (x+wide, y), (x+wide, y+length), (x, y+length)]))
+                polygons.append(shp.Polygon([(x,y), (x+wide, y), (x+wide, y+length), (x, y+length)]))
 
         print("Boundary reduced.")
         return gpd.GeoDataFrame({'geometry':polygons})
@@ -117,16 +119,17 @@ class StravaExtractor:
         auth = json.load(r)
         headers = {'Authorization':auth["token_type"]+ " " + auth["access_token"]}
 
-        cols = ['id', 'name', 'effort_count', 'athlete_count', 'distance', 'average_grade', 
+        cols = ['id', 'name', 'activity_type', 'effort_count', 'athlete_count', 'distance', 'average_grade', 
         'maximum_grade', 'elevation_high', 'elevation_low', 'total_elevation_gain', 'polyline']
         self.runsData = pd.DataFrame(columns=cols)
         index = 0
         for segmentId in self.runs:
             req = requests.get("https://www.strava.com/api/v3/segments/{}".format(segmentId), headers=headers).json()
-            self.runsData.loc[index] = np.array([req["id"], req["name"], req["effort_count"], req["athlete_count"], 
+            self.runsData.loc[index] = np.array([req["id"], req["name"], req["activity_type"], req["effort_count"], req["athlete_count"], 
                 req["distance"], req["average_grade"], req["maximum_grade"], req["elevation_high"], 
                 req["elevation_low"], req["total_elevation_gain"], req["map"]["polyline"]])
             index = index+1
+            print(req["id"])
 
             # Query limit counter
             count_check()
@@ -142,13 +145,13 @@ class StravaExtractor:
         auth = json.load(r)
         headers = {'Authorization':auth["token_type"]+ " " + auth["access_token"]}
 
-        cols = ['id', 'name', 'effort_count', 'athlete_count', 'distance', 'average_grade', 
+        cols = ['id', 'name', 'activity_type', 'effort_count', 'athlete_count', 'distance', 'average_grade', 
         'maximum_grade', 'elevation_high', 'elevation_low', 'total_elevation_gain', 'polyline']
         self.ridesData = pd.DataFrame(columns=cols)
         index = 0
         for segmentId in self.rides:
             req = requests.get("https://www.strava.com/api/v3/segments/{}".format(segmentId), headers=headers).json()
-            self.ridesData.loc[index] = np.array([req["id"], req["name"], req["effort_count"], req["athlete_count"], 
+            self.ridesData.loc[index] = np.array([req["id"], req["name"], req["activity_type"], req["effort_count"], req["athlete_count"], 
                 req["distance"], req["average_grade"], req["maximum_grade"], req["elevation_high"], 
                 req["elevation_low"], req["total_elevation_gain"], req["map"]["polyline"]])
             index = index+1
@@ -159,7 +162,19 @@ class StravaExtractor:
             query_counter = query_counter+1 
 
 
-    def get_segments(self, currentBoundary: GeoDataFrame, activity_type: str, city: int, grid: bool):
+    def decode_polyline(self, segments: pd.DataFrame) -> gpd.GeoDataFrame:
+        segments["geometry"] = None
+        for i in range(len(segments)):
+            pointList = polyline.decode(segments.loc[i,"polyline"])
+            poly = shp.LineString([[p[0], p[1]] for p in pointList])
+            segments.loc[i,"geometry"] = poly
+        segments = segments.drop(columns=["polyline"])
+        segments = gpd.GeoDataFrame(segments)
+        segments = segments.set_crs(epsg=4326)
+        return segments
+
+
+    def get_segments(self, currentBoundary: gpd.GeoDataFrame, activity_type: str, city: int, grid: bool):
 
         global query_counter
 
@@ -211,7 +226,15 @@ class StravaExtractor:
                     newBoundary = self.reduce_boundary(currentBoundary, city)
                     for i in range(len(newBoundary)):
                         self.get_segments(newBoundary, "riding", i, True)
-        
+
+
+    def load(self, segments: gpd.GeoDataFrame, city: str):
+        #Upload to DB
+        ti = time.time()
+        print("Uploading to DB entries for {}...".format(city))
+        self.db.insert_gdf(segments, "segments")
+        print("Segments uploaded for {}. Time elapsed: {} s".format(city, round(time.time()-ti, 2)))
+
 
     def run(self, activity_type:str) -> bool:
         # Check for access_token, updating it if expired
@@ -229,23 +252,31 @@ class StravaExtractor:
                 print("Found {} running segments for {}. Time elapsed: {} s".format(len(self.runs), city, round(time.time()-ti, 2)))
                 self.get_runs_data()
                 print("Found {} running segments for {}. Time elapsed: {} s".format(len(self.runsData), city, round(time.time()-ti, 2)))
+                self.segments = self.decode_polyline(self.runsData)
+                self.load(self.segments, city)
             elif activity_type == "riding":
                 ti = time.time()
                 self.get_segments(self.boundary, activity_type, self.city.index(city), False)
                 print("Found {} riding segments for {}. Time elapsed: {} s".format(len(self.rides), city, round(time.time()-ti, 2)))
                 self.get_rides_data()
                 print("Found {} riding segments for {}. Time elapsed: {} s".format(len(self.ridesData), city, round(time.time()-ti, 2)))
+                self.segments = self.decode_polyline(self.ridesData)
+                self.load(self.segments, city)
             else:
                 ti = time.time()
                 self.get_segments(self.boundary, "running", self.city.index(city), False)
                 print("Found {} running segments for {}. Time elapsed: {} s".format(len(self.runs), city, round(time.time()-ti, 2)))
                 self.get_runs_data()
                 print("Found {} running segments for {}. Time elapsed: {} s".format(len(self.runsData), city, round(time.time()-ti, 2)))
+                self.segments = self.decode_polyline(self.runsData)
+                self.load(self.segments, city)
                 ti = time.time()
                 self.get_segments(self.boundary, "riding", self.city.index(city), False)
                 print("Found {} riding segments for {}. Time elapsed: {} s".format(len(self.rides), city, round(time.time()-ti, 2)))
                 self.get_rides_data()
                 print("Found {} running segments for {}. Time elapsed: {} s".format(len(self.ridesData), city, round(time.time()-ti, 2)))
+                self.segments = self.decode_polyline(self.ridesData)
+                self.load(self.segments, city)
 
         return True
 

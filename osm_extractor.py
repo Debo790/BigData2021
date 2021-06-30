@@ -50,6 +50,12 @@ class CityExtractor:
             raise ConnectionError("No items were found for {}. Try with another city or check your Overpass query limit.".format(city))
         else:
             self.items = self.items.set_crs(epsg=4326)
+
+            # Columns reorder
+            cols = self.items.columns.to_list()
+            cols = cols[-1:] + cols[:-1]
+            self.items = self.items[cols]
+            
             tf = time.time()
             print("Extracted {} elements for {}. Time elapsed: {} s".format(len(self.items), city, round(tf-ti, 2)))
     
@@ -59,9 +65,10 @@ class CityExtractor:
 
     def load(self, city):
         #Upload to DB
+        ti = time.time()
         print("Uploading to DB entries for {}...".format(city))
         self.db.insert_gdf(self.items, "osm")
-        print("Data uploaded for {}.".format(city))
+        print("Data uploaded for {}. Time elapsed: {} s".format(city, round(time.time()-ti, 2)))
 
     def run(self) -> bool:
         for city in self.city:

@@ -6,3 +6,4 @@ shapely
 psycopg2
 sqlalchemy
 geoalchemy2
+polyline

@@ -37,8 +37,9 @@ class PostgresDB:
             query = f.read()
         for q in query.split(";")[:-1]:
             self.cursor.execute(q)
-        set_crs = "select UpdateGeometrySRID('osm','geometry',4326);"
-        self.cursor.execute(set_crs)
+        for table in ["osm", "segments"]:
+            set_crs = "select UpdateGeometrySRID('{}','geometry',4326);".format(table)
+            self.cursor.execute(set_crs)
         print("Tables created.")
     
     def insert_gdf(self, gdf: GeoDataFrame, name: str):
@@ -72,9 +73,23 @@ class PostgresDB:
         with self.connect():
             self.create_tables()
 
-        df.to_sql("{}".format(name).casefold(), con, schema=None, if_exists='append', chunksize=None)
+        df.to_sql("{}".format(name).casefold(), con, schema=None, if_exists='append', chunksize=None, index=False)
         con.close()    
     
+    def upsert(self, gdf: GeoDataFrame, name: str):
+        if name=="osm":
+            cols = "geometry, type, id, tags"
+            vals = "gdf.geometry, gdf.type, gdf.id, gdf.tags"
+        else:
+            cols = "INSERT SEGMENT COLUMNS"
+            vals = "INSERT SEGMENT VALUES"
+        
+        
+        with self.connect():
+            for i in gdf.id:
+                query = "insert into {} ({}) values ({}) on conflict on constraint {} do update set ".format(name, cols, vals, "id")
+                self.cursor.execute(query)
+
     def close(self):
 
         if self.is_connected():
