@@ -16,6 +16,7 @@ class CityExtractor:
         self.db = PostgresDB()
         #self.boundary = None
 
+
     def extract(self, city):
         
         print("Extracting nwr and routes for {}".format(city))
@@ -59,9 +60,11 @@ class CityExtractor:
             tf = time.time()
             print("Extracted {} elements for {}. Time elapsed: {} s".format(len(self.items), city, round(tf-ti, 2)))
     
+
     def update(self, city):
         # Update Redis
         print("Redis updating for {}...".format(city))
+
 
     def load(self, city):
         #Upload to DB
@@ -69,6 +72,7 @@ class CityExtractor:
         print("Uploading to DB entries for {}...".format(city))
         self.db.insert_gdf(self.items, "osm")
         print("Data uploaded for {}. Time elapsed: {} s".format(city, round(time.time()-ti, 2)))
+
 
     def run(self) -> bool:
         for city in self.city:
