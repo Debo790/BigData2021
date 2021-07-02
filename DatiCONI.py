@@ -1,3 +1,4 @@
+import argparse
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -8,21 +9,21 @@ from db_wrapper import PostgresDB
 class ConiExtractor:
 
     def __init__(self) -> None:
+        self.codici = []    # codici di tutte le societa iscritte al Coni
+        self.dati = []      # lista di dizionari con i dettagli delle società (utilizzato per debug)
         self.societa = pd.DataFrame()
         self.db = PostgresDB()
 
-    def extractSocieties(self):
+    def extractSocietiesCode(self):
 
         # ESTRAZIONE CODICI SOCIETA'--------------------------------------------------------------------------
         # Le società sono numerate in ordine progressivo, ma alcuni numeri mancano (forse alcune società sono state chiuse o trasferite),
         # quindi prima salviamo tutti i codici delle società in una lista, poi ne estraiamo i dettagli dai relativi link, ciclando la lista stessa
 
         all_societa="https://www.coni.it/it/registro-societa-sportive/home/registro-2-0.html?reg=0&start=" 
-        codici_societa=[]           # link contenente i codici di tutte le società
-        dati_societa=[]             # lista di dizionari con i dettagli delle società
-
+        
         ti = time.time()
-        for k in range(0,2000,20):    #ciclare fino a 102260 (in totale sono 102265. 5 società sull'ultima pagina)
+        for k in range(0,102260,20):    #ciclare fino a 102260 (in totale sono 102265. 5 società sull'ultima pagina)
             indirizzo=all_societa+str(k)
             print("Fetching {}".format(indirizzo))
             page=requests.get(indirizzo)
@@ -33,23 +34,26 @@ class ConiExtractor:
                 if len(element)>1:
                     numero = str(element).split()[2]                # link società
                     numero=numero.strip('">')               
-                    codici_societa.append(numero.split('=')[-1])    # codice società
+                    self.codici.append(numero.split('=')[-1])
                     #print("In results... Association no. {}".format(el))
                     el+=1
             print("Parsed {} associations. Elapsed time: {} s".format(k+20, round(time.time()-ti, 2)))
             print("-----------------------------------------------")
 
-        #print("Associations' codes: ".format(codici_societa))
+        #print("Associations' codes: ".format(self.codici))
         print("-----------------------------------------------")
         #---------------------------------------------------------------------------------------------------
 
             
+    def extractSocietiesData(self, to_json: bool):
+
         # ESTRAZIONE DATI SOCIETA'--------------------------------------------------------------------------
         print("Extracting associations data.....")
         baseURL="https://www.coni.it/it/registro-societa-sportive/home/registro-2-0/registro_dettaglio.html?id_societa="
 
-
-        for codice in codici_societa:
+        counter = 0
+        ti = time.time()
+        for codice in self.codici:
             indirizzo=baseURL+str(codice)
             page = requests.get(indirizzo)
             #print(page.content)
@@ -75,26 +79,47 @@ class ConiExtractor:
             'agonistici': agonistici_praticanti[0],
             'praticanti': agonistici_praticanti[1]
             }
-            dati_societa.append(dettaglio)
+            self.dati.append(dettaglio)
             print("Adding: {}".format(dettaglio["name"]))
-            self.societa = pd.DataFrame(dettaglio, index=[0])
-            self.load(self.societa)
+            self.societa = self.societa.append(dettaglio, ignore_index=True)
+            if(len(self.societa)%2000 == 0):
+                self.load(self.societa)
+                self.societa = pd.DataFrame()
+                print("Time elapsed for the bulk: {} s.".format(round(time.time()-ti, 2)))
+                ti = time.time()
             
+        self.load(self.societa) # Last upload
+        self.societa = pd.DataFrame()
         #-----------------------------------------------------------
 
-
         # OUTPUT FILE -- DEBUG PURPOSE:
-        with open('tmp/dati_CONI.json', 'w') as outfile:
-            json.dump(dati_societa, outfile)
+        if to_json:
+            with open('tmp/dati_CONI.json', 'w') as outfile:
+                json.dump(self.dati, outfile)
+
 
     def load(self, societa: pd.DataFrame):
-        self.db.insert_df(societa, "coni")
-        print("Inserted societa {}".format(societa["code"][0]))
+        if self.db.insert_df(societa, "coni"):
+            print("Inserted {} societies.".format(len(societa)))
 
-    def run(self):
-        self.extractSocieties()
+
+    def run(self, to_json: bool) -> bool:
+        self.extractSocietiesCode()
+        self.extractSocietiesData(to_json)
+        return True
 
 if __name__ == "__main__":
     
+    parser = argparse.ArgumentParser(description="BDT Project 2021 - CONI societies data extraction")
+    parser.add_argument("--to_json", help="Write results in tmp/dati_CONI.json (debug purpose only)")
+    args = parser.parse_args()
+
     extractor = ConiExtractor()
-    extractor.run()
+    success = False
+    if args.to_json:
+        success = extractor.run(to_json=True)
+    else:
+        success = extractor.run(to_json=False)
+
+    if success:
+        print("All societes data extracted and loaded.")

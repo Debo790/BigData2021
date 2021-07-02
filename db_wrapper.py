@@ -59,7 +59,7 @@ class PostgresDB:
         gdf.to_postgis("{}".format(name).casefold(), engine, if_exists='append', chunksize=None)
         con.close()
 
-    def insert_df(self, df: DataFrame, name: str):
+    def insert_df(self, df: DataFrame, name: str) -> bool:
         
         config = configparser.ConfigParser()
         config.read('conf/config.ini')
@@ -74,7 +74,9 @@ class PostgresDB:
             self.create_tables()
 
         df.to_sql("{}".format(name).casefold(), con, schema=None, if_exists='append', chunksize=None, index=False)
-        con.close()    
+        con.close()
+
+        return True
     
     def upsert(self, gdf: GeoDataFrame, name: str):
         if name=="osm":
