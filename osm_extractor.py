@@ -80,6 +80,7 @@ class CityExtractor:
             #self.get_boundary()
             self.update(city, r)
             self.load(city)
+            time.sleep(10)      # Timeout to avoid Overpass query limit
         return True
 
 
