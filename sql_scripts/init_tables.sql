@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS osm (
-    type varchar(255),
+    city varchar,
+    type varchar(20),
     id bigint NOT NULL,
     tags text,
     geometry geometry

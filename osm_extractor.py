@@ -7,6 +7,7 @@ from osm2geojson.main import json2geojson
 import argparse
 import time
 import redis
+from shapely.ops import CollectionOperator
 from db_wrapper import PostgresDB
 
 class CityExtractor:
@@ -36,7 +37,7 @@ class CityExtractor:
             );
             out geom qt;
             rel(pivot.searchArea)(area.wrap) -> .ex;
-            //.ex out geom;
+            .ex out geom;
             way(r.ex)->.cross;
             relation(around.cross:0)["route"="hiking"]->.remove;
             relation["route"="hiking"](area.searchArea)->.all;
@@ -57,6 +58,7 @@ class CityExtractor:
             cols = self.items.columns.to_list()
             cols = cols[-1:] + cols[:-1]
             self.items = self.items[cols]
+            self.items.insert(loc=0, column="city", value=city)
             
             tf = time.time()
             print("Extracted {} elements for {}. Time elapsed: {} s".format(len(self.items), city, round(tf-ti, 2)))
@@ -80,6 +82,7 @@ class CityExtractor:
             #self.get_boundary()
             self.update(city, r)
             self.load(city)
+            print("Waiting 10 seconds to not overload Overpass API...")
             time.sleep(10)      # Timeout to avoid Overpass query limit
         return True
 
