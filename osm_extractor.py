@@ -37,7 +37,7 @@ class CityExtractor:
             );
             out geom qt;
             rel(pivot.searchArea)(area.wrap) -> .ex;
-            .ex out geom;
+            //.ex out geom;
             way(r.ex)->.cross;
             relation(around.cross:0)["route"="hiking"]->.remove;
             relation["route"="hiking"](area.searchArea)->.all;
