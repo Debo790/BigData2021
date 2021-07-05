@@ -6,6 +6,7 @@ from osm2geojson.main import xml2geojson
 from osm2geojson.main import json2geojson
 import argparse
 import time
+import redis
 from db_wrapper import PostgresDB
 
 class CityExtractor:
@@ -61,10 +62,9 @@ class CityExtractor:
             print("Extracted {} elements for {}. Time elapsed: {} s".format(len(self.items), city, round(tf-ti, 2)))
     
 
-    def update(self, city):
+    def update(self, city, r: redis.Redis):
         # Update Redis
-        print("Redis updating for {}...".format(city))
-
+        r.sadd("osm:cities", city)
 
     def load(self, city):
         #Upload to DB
@@ -74,11 +74,11 @@ class CityExtractor:
         print("Data uploaded for {}. Time elapsed: {} s".format(city, round(time.time()-ti, 2)))
 
 
-    def run(self) -> bool:
+    def run(self, r: redis.Redis) -> bool:
         for city in self.city:
             self.extract(city)
             #self.get_boundary()
-            self.update(city)
+            self.update(city, r)
             self.load(city)
         return True
 
@@ -87,13 +87,33 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="BDT Project 2021 - OSM data extraction")
     parser.add_argument("--city", nargs='+', type=str, help="the city to extract", required=True)
+    parser.add_argument("--update", help="update even if data are already in db")
 
     args = parser.parse_args()
 
-    city = args.city
+    userCities = args.city
+    cities = []
+    update = args.update
 
-    ce = CityExtractor(city)
-    success = ce.run()
+    r = redis.Redis(host="localhost", port=6379, db=0)
 
-    if success:
-        print("Done.")
+    if update:
+        ce = CityExtractor(userCities)
+        success = ce.run(r)
+
+        if success:
+            print("Done.")
+    else: 
+        for i in userCities:
+            if r.sismember("osm:cities", i):
+                print("{}'s OSM data already in database. Skipping.".format(i))
+            else:
+                cities.append(i)
+
+        if cities is not None:
+            ce = CityExtractor(cities)
+            success = ce.run(r)
+
+            if success:
+                print("Done.")
+    
