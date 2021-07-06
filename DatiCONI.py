@@ -27,7 +27,7 @@ class ConiExtractor:
         all_societa="https://www.coni.it/it/registro-societa-sportive/home/registro-2-0.html?reg=0&start=" 
         
         ti = time.time()
-        for k in range(0,102260,20):    #ciclare fino a 102260 (in totale sono 102265. 5 società sull'ultima pagina)
+        for k in range(0,20,20):    #ciclare fino a 102260 (in totale sono 102265. 5 società sull'ultima pagina)
             indirizzo=all_societa+str(k)
             print("Fetching {}".format(indirizzo))
             try:
@@ -130,6 +130,10 @@ class ConiExtractor:
             except requests.exceptions.Timeout:
                 print("Connection timed out for association with code {}. Association discarded.".format(codice))
                 self.r.sadd("coni:discarded", codice)
+            except requests.exceptions.ConnectionError:
+                print("Connection error - Probably too many requests. Waiting..")
+                time.sleep(30)
+                
 
         self.load(self.societa) # Last upload
         self.societa = pd.DataFrame()

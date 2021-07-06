@@ -1,13 +1,12 @@
 from typing import List
 import geopandas as gpd
-from geopandas.geodataframe import GeoDataFrame
 from osm2geojson.helpers import overpass_call
 from osm2geojson.main import xml2geojson
-from osm2geojson.main import json2geojson
 import argparse
 import time
 import redis
-from shapely.ops import CollectionOperator
+import requests
+from requests.exceptions import HTTPError
 from db_wrapper import PostgresDB
 
 class CityExtractor:
@@ -46,23 +45,25 @@ class CityExtractor:
             '''.format(city)
 
         ti = time.time()
-        result = overpass_call(myquery)
-        res = xml2geojson(result)
-        self.items = gpd.GeoDataFrame.from_features(res)
-        if len(self.items) <= 0:
-            raise ConnectionError("No items were found for {}. Try with another city or check your Overpass query limit.".format(city))
-        else:
-            self.items = self.items.set_crs(epsg=4326)
+        try: 
+            result = overpass_call(myquery)
+            res = xml2geojson(result)
+            self.items = gpd.GeoDataFrame.from_features(res)
+            if len(self.items) <= 0:
+                raise HTTPError("No items were found for {}. Try with another city or check your Overpass query limit.".format(city))
+            else:
+                self.items = self.items.set_crs(epsg=4326)
 
-            # Columns reorder
-            cols = self.items.columns.to_list()
-            cols = cols[-1:] + cols[:-1]
-            self.items = self.items[cols]
-            self.items.insert(loc=0, column="city", value=city)
-            
-            tf = time.time()
-            print("Extracted {} elements for {}. Time elapsed: {} s".format(len(self.items), city, round(tf-ti, 2)))
-    
+                # Columns reorder
+                cols = self.items.columns.to_list()
+                cols = cols[-1:] + cols[:-1]
+                self.items = self.items[cols]
+                self.items.insert(loc=0, column="city", value=city)
+                
+                tf = time.time()
+                print("Extracted {} elements for {}. Time elapsed: {} s".format(len(self.items), city, round(tf-ti, 2)))
+        except requests.exceptions.HTTPError:
+            print("Overpass API responded with status 429. Try again.")
 
     def update(self, city, r: redis.Redis):
         # Update Redis
@@ -80,8 +81,9 @@ class CityExtractor:
         for city in self.city:
             self.extract(city)
             #self.get_boundary()
-            self.update(city, r)
-            self.load(city)
+            if self.items is not None and len(self.items)>0:
+                self.update(city, r)
+                self.load(city)
             print("Waiting 10 seconds to not overload Overpass API...")
             time.sleep(10)      # Timeout to avoid Overpass query limit
         return True
