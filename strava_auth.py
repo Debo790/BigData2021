@@ -5,8 +5,11 @@ import configparser
 
 class StravaAuth:
     
-    def __init__(self):
-        f = open("conf/auth.json", "r")
+    def __init__(self, user: str):
+
+        self.user = user
+
+        f = open("conf/auth_{}.json".format(user), "r")
         auth = json.load(f)
         if auth["expires_at"] > time():
             self.token_type = auth["token_type"]
@@ -22,8 +25,8 @@ class StravaAuth:
         print("Access token expired. Refreshing...")
         config = configparser.ConfigParser()
         config.read('conf/config.ini')
-        secret = config['strava']['client_secret']
-        id = config['strava']['id']
+        secret = config['strava{}'.format(self.user)]['client_secret']
+        id = config['strava{}'.format(self.user)]['id']
         
         params = {'client_id':id,
         'client_secret':secret,
@@ -31,7 +34,7 @@ class StravaAuth:
         'refresh_token':refresh_token}
         req = requests.post("https://www.strava.com/oauth/token?", params=params)
         #print(req.url)
-        with open('conf/auth.json', 'w') as f:
+        with open('conf/auth_{}.json'.format(self.user), 'w') as f:
             json.dump(req.json(), f, indent=4)
         print("Access token updated.")
 
@@ -40,4 +43,4 @@ class StravaAuth:
 
     
 if __name__ == "__main__":
-    StravaAuth()
+    StravaAuth("1")
