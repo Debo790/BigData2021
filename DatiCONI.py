@@ -27,7 +27,7 @@ class ConiExtractor:
         all_societa="https://www.coni.it/it/registro-societa-sportive/home/registro-2-0.html?reg=0&start=" 
         
         ti = time.time()
-        for k in range(0,20,20):    #ciclare fino a 102260 (in totale sono 102265. 5 società sull'ultima pagina)
+        for k in range(0,102260,20):    #ciclare fino a 102260 (in totale sono 102265. 5 società sull'ultima pagina)
             indirizzo=all_societa+str(k)
             print("Fetching {}".format(indirizzo))
             try:
@@ -133,7 +133,7 @@ class ConiExtractor:
             except requests.exceptions.ConnectionError:
                 print("Connection error - Probably too many requests. Waiting..")
                 time.sleep(30)
-                
+
 
         self.load(self.societa) # Last upload
         self.societa = pd.DataFrame()
@@ -153,7 +153,7 @@ class ConiExtractor:
     def run(self, to_json: bool, timeout: int) -> bool:
         self.extractSocietiesCode()
         self.extractSocietiesData(to_json, timeout)
-        while self.r.scard("coni:discarded") > 0 and timeout<=30:
+        while self.r.scard("coni:discarded") > 0 and timeout<30:
             timeout = timeout+10
             print("Round completed. Timeout increased to {}s. Missing {} associations.".format(timeout, self.r.scard("coni:discarded")))
             self.r.delete("coni:discarded")

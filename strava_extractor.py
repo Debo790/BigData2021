@@ -112,7 +112,7 @@ class StravaExtractor:
             print("Extracted boundaries for {}. Time elapsed: {} s".format(city, round(time.time()-ti, 2)))        
     
 
-    def get_runs_data(self, city: str):
+    def get_runs_data(self, city: str, consumer: bool):
 
         global query_counter
 
@@ -124,24 +124,37 @@ class StravaExtractor:
         'maximum_grade', 'elevation_high', 'elevation_low', 'total_elevation_gain']
         self.runsData = pd.DataFrame(columns=cols)
         index = 0
-        for segmentId in self.runs:
-            req = requests.get("https://www.strava.com/api/v3/segments/{}".format(segmentId), headers=headers).json()
-            self.runsData.loc[index] = np.array([req["id"], req["name"], req["activity_type"], req["effort_count"], req["athlete_count"], 
-                req["distance"], req["average_grade"], req["maximum_grade"], req["elevation_high"], 
-                req["elevation_low"], req["total_elevation_gain"]])
-            index = index+1
-            self.r.srem("strava:running:code", segmentId)
-
-            # Query limit counter
-            count_check()
-            if query_counter%50==0:
-                print("Query counter: {}".format(query_counter))
-            query_counter = query_counter+1 
+        if consumer:
+            for i in self.r.smembers("strava:running:code"):
+                req = requests.get("https://www.strava.com/api/v3/segments/{}".format(i.decode("utf-8")), headers=headers).json()
+                self.runsData.loc[index] = np.array([req["id"], req["name"], req["activity_type"], req["effort_count"], req["athlete_count"], 
+                    req["distance"], req["average_grade"], req["maximum_grade"], req["elevation_high"], 
+                    req["elevation_low"], req["total_elevation_gain"]])
+                index = index+1
+                self.r.srem("strava:running:code", i.decode("utf-8"))
+                # Query limit counter
+                count_check()
+                if query_counter%50==0:
+                    print("Query counter: {}".format(query_counter))
+                query_counter = query_counter+1 
+        else: 
+            for segmentId in self.runs:
+                req = requests.get("https://www.strava.com/api/v3/segments/{}".format(segmentId), headers=headers).json()
+                self.runsData.loc[index] = np.array([req["id"], req["name"], req["activity_type"], req["effort_count"], req["athlete_count"], 
+                    req["distance"], req["average_grade"], req["maximum_grade"], req["elevation_high"], 
+                    req["elevation_low"], req["total_elevation_gain"]])
+                index = index+1
+                self.r.srem("strava:running:code", segmentId)
+                # Query limit counter
+                count_check()
+                if query_counter%50==0:
+                    print("Query counter: {}".format(query_counter))
+                query_counter = query_counter+1 
 
         self.runsData["city"] = city
 
 
-    def get_rides_data(self, city: str):
+    def get_rides_data(self, city: str, consumer: bool):
 
         global query_counter
 
@@ -153,19 +166,32 @@ class StravaExtractor:
         'maximum_grade', 'elevation_high', 'elevation_low', 'total_elevation_gain']
         self.ridesData = pd.DataFrame(columns=cols)
         index = 0
-        for segmentId in self.rides:
-            req = requests.get("https://www.strava.com/api/v3/segments/{}".format(segmentId), headers=headers).json()
-            self.ridesData.loc[index] = np.array([req["id"], req["name"], req["activity_type"], req["effort_count"], req["athlete_count"], 
-                req["distance"], req["average_grade"], req["maximum_grade"], req["elevation_high"], 
-                req["elevation_low"], req["total_elevation_gain"]])
-            index = index+1
-            self.r.srem("strava:riding:code", segmentId)
-            
-            # Query limit counter
-            count_check()
-            if query_counter%50==0:
-                print("Query counter: {}".format(query_counter))
-            query_counter = query_counter+1 
+        if consumer:
+            for i in self.r.smembers("strava:riding:code"):
+                req = requests.get("https://www.strava.com/api/v3/segments/{}".format(i.decode("utf-8")), headers=headers).json()
+                self.ridesData.loc[index] = np.array([req["id"], req["name"], req["activity_type"], req["effort_count"], req["athlete_count"], 
+                    req["distance"], req["average_grade"], req["maximum_grade"], req["elevation_high"], 
+                    req["elevation_low"], req["total_elevation_gain"]])
+                index = index+1
+                self.r.srem("strava:riding:code", i.decode("utf-8"))
+                # Query limit counter
+                count_check()
+                if query_counter%50==0:
+                    print("Query counter: {}".format(query_counter))
+                query_counter = query_counter+1 
+        else:
+            for segmentId in self.rides:
+                req = requests.get("https://www.strava.com/api/v3/segments/{}".format(segmentId), headers=headers).json()
+                self.ridesData.loc[index] = np.array([req["id"], req["name"], req["activity_type"], req["effort_count"], req["athlete_count"], 
+                    req["distance"], req["average_grade"], req["maximum_grade"], req["elevation_high"], 
+                    req["elevation_low"], req["total_elevation_gain"]])
+                index = index+1
+                self.r.srem("strava:riding:code", segmentId)
+                # Query limit counter
+                count_check()
+                if query_counter%50==0:
+                    print("Query counter: {}".format(query_counter))
+                query_counter = query_counter+1 
         
         self.ridesData["city"] = city
 
@@ -243,14 +269,14 @@ class StravaExtractor:
         query_counter = query_counter+2     # 2 requests -> worst case scenario (expired token)
 
         # Simple consumer ("clean" segments still not analyzed)
-        if self.user==0:
+        if self.user=="0":
             ti = time.time()
-            self.get_runs_data(self.city[0])
-            print("Extracted data for {} running segments for {}. Time elapsed: {} s".format(len(self.runsData), city, round(time.time()-ti, 2)))
-            self.load(self.runsData, city)
-            self.get_rides_data(self.city[0])
-            print("Extracted data for {} riding segments for {}. Time elapsed: {} s".format(len(self.ridesData), city, round(time.time()-ti, 2)))
-            self.load(self.ridesData, city)
+            self.get_runs_data(self.city[0], consumer=True)
+            print("Extracted data for {} running segments for {}. Time elapsed: {} s".format(len(self.runsData), self.city[0], round(time.time()-ti, 2)))
+            self.load(self.runsData, self.city[0])
+            self.get_rides_data(self.city[0], consumer=True)
+            print("Extracted data for {} riding segments for {}. Time elapsed: {} s".format(len(self.ridesData), self.city[0], round(time.time()-ti, 2)))
+            self.load(self.ridesData, self.city[0])
         else:
             for city in self.city:
                 self.get_boundary(city)
@@ -258,7 +284,7 @@ class StravaExtractor:
                     ti = time.time()
                     self.get_segments(self.boundary, activity_type, self.city.index(city), False)
                     print("Found {} running segments for {}. Time elapsed: {} s".format(len(self.runs), city, round(time.time()-ti, 2)))
-                    self.get_runs_data(city)
+                    self.get_runs_data(city, consumer=False)
                     print("Extracted data for {} running segments for {}. Time elapsed: {} s".format(len(self.runsData), city, round(time.time()-ti, 2)))
                     self.load(self.runsData, city)
                     self.r.sadd("strava:running:cities", city)
@@ -266,7 +292,7 @@ class StravaExtractor:
                     ti = time.time()
                     self.get_segments(self.boundary, activity_type, self.city.index(city), False)
                     print("Found {} riding segments for {}. Time elapsed: {} s".format(len(self.rides), city, round(time.time()-ti, 2)))
-                    self.get_rides_data(city)
+                    self.get_rides_data(city, consumer=False)
                     print("Extracted data for {} riding segments for {}. Time elapsed: {} s".format(len(self.ridesData), city, round(time.time()-ti, 2)))
                     self.load(self.ridesData, city)
                     self.r.sadd("strava:riding:cities", city)
@@ -274,14 +300,14 @@ class StravaExtractor:
                     ti = time.time()
                     self.get_segments(self.boundary, "running", self.city.index(city), False)
                     print("Found {} running segments for {}. Time elapsed: {} s".format(len(self.runs), city, round(time.time()-ti, 2)))
-                    self.get_runs_data(city)
+                    self.get_runs_data(city, consumer=False)
                     print("Extracted data for {} running segments for {}. Time elapsed: {} s".format(len(self.runsData), city, round(time.time()-ti, 2)))
                     self.load(self.runsData, city)
                     self.r.sadd("strava:running:cities", city)
                     ti = time.time()
                     self.get_segments(self.boundary, "riding", self.city.index(city), False)
                     print("Found {} riding segments for {}. Time elapsed: {} s".format(len(self.rides), city, round(time.time()-ti, 2)))
-                    self.get_rides_data(city)
+                    self.get_rides_data(city, consumer=False)
                     print("Extracted data for {} riding segments for {}. Time elapsed: {} s".format(len(self.ridesData), city, round(time.time()-ti, 2)))
                     self.load(self.ridesData, city)
                     self.r.sadd("strava:riding:cities", city)

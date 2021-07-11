@@ -23,7 +23,6 @@ CREATE TABLE IF NOT EXISTS segments (
 
 CREATE TABLE IF NOT EXISTS comuni (
     istat_comune bigint primary key,
-    geometry geometry(MultiPolygon,4326),
     regione text,
     nome text,
     nome_secondario text,
