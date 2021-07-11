@@ -10,7 +10,6 @@ from osm2geojson.main import json2geojson
 import shapely.geometry as shp
 import requests
 import json
-import polyline
 import redis
 from strava_auth import StravaAuth
 from db_wrapper import PostgresDB
@@ -62,7 +61,6 @@ class StravaExtractor:
         self.rides = set()
         self.runsData = None
         self.ridesData = None
-        self.segments = gpd.GeoDataFrame()
         self.db = PostgresDB()
         self.r = r
         self.user = user
@@ -114,7 +112,7 @@ class StravaExtractor:
             print("Extracted boundaries for {}. Time elapsed: {} s".format(city, round(time.time()-ti, 2)))        
     
 
-    def get_runs_data(self):
+    def get_runs_data(self, city: str):
 
         global query_counter
 
@@ -123,14 +121,14 @@ class StravaExtractor:
         headers = {'Authorization':auth["token_type"]+ " " + auth["access_token"]}
 
         cols = ['id', 'name', 'activity_type', 'effort_count', 'athlete_count', 'distance', 'average_grade', 
-        'maximum_grade', 'elevation_high', 'elevation_low', 'total_elevation_gain', 'polyline']
+        'maximum_grade', 'elevation_high', 'elevation_low', 'total_elevation_gain']
         self.runsData = pd.DataFrame(columns=cols)
         index = 0
         for segmentId in self.runs:
             req = requests.get("https://www.strava.com/api/v3/segments/{}".format(segmentId), headers=headers).json()
             self.runsData.loc[index] = np.array([req["id"], req["name"], req["activity_type"], req["effort_count"], req["athlete_count"], 
                 req["distance"], req["average_grade"], req["maximum_grade"], req["elevation_high"], 
-                req["elevation_low"], req["total_elevation_gain"], req["map"]["polyline"]])
+                req["elevation_low"], req["total_elevation_gain"]])
             index = index+1
             self.r.srem("strava:running:code", segmentId)
 
@@ -140,8 +138,10 @@ class StravaExtractor:
                 print("Query counter: {}".format(query_counter))
             query_counter = query_counter+1 
 
+        self.runsData["city"] = city
 
-    def get_rides_data(self):
+
+    def get_rides_data(self, city: str):
 
         global query_counter
 
@@ -150,14 +150,14 @@ class StravaExtractor:
         headers = {'Authorization':auth["token_type"]+ " " + auth["access_token"]}
 
         cols = ['id', 'name', 'activity_type', 'effort_count', 'athlete_count', 'distance', 'average_grade', 
-        'maximum_grade', 'elevation_high', 'elevation_low', 'total_elevation_gain', 'polyline']
+        'maximum_grade', 'elevation_high', 'elevation_low', 'total_elevation_gain']
         self.ridesData = pd.DataFrame(columns=cols)
         index = 0
         for segmentId in self.rides:
             req = requests.get("https://www.strava.com/api/v3/segments/{}".format(segmentId), headers=headers).json()
             self.ridesData.loc[index] = np.array([req["id"], req["name"], req["activity_type"], req["effort_count"], req["athlete_count"], 
                 req["distance"], req["average_grade"], req["maximum_grade"], req["elevation_high"], 
-                req["elevation_low"], req["total_elevation_gain"], req["map"]["polyline"]])
+                req["elevation_low"], req["total_elevation_gain"]])
             index = index+1
             self.r.srem("strava:riding:code", segmentId)
             
@@ -166,18 +166,8 @@ class StravaExtractor:
             if query_counter%50==0:
                 print("Query counter: {}".format(query_counter))
             query_counter = query_counter+1 
-
-
-    def decode_polyline(self, segments: pd.DataFrame) -> gpd.GeoDataFrame:
-        segments["geometry"] = None
-        for i in range(len(segments)):
-            pointList = polyline.decode(segments.loc[i,"polyline"])
-            poly = shp.LineString([[p[0], p[1]] for p in pointList])
-            segments.loc[i,"geometry"] = poly
-        segments = segments.drop(columns=["polyline"])
-        segments = gpd.GeoDataFrame(segments)
-        segments = segments.set_crs(epsg=4326)
-        return segments
+        
+        self.ridesData["city"] = city
 
 
     def get_segments(self, currentBoundary: gpd.GeoDataFrame, activity_type: str, city: int, grid: bool):
@@ -236,11 +226,11 @@ class StravaExtractor:
                         self.get_segments(newBoundary, "riding", i, True)
 
 
-    def load(self, segments: gpd.GeoDataFrame, city: str):
+    def load(self, segments: pd.DataFrame, city: str):
         #Upload to DB
         ti = time.time()
         print("Uploading to DB entries for {}...".format(city))
-        self.db.insert_gdf(segments, "segments")
+        self.db.insert_df(segments, "segments")
         print("Segments uploaded for {}. Time elapsed: {} s".format(city, round(time.time()-ti, 2)))
 
 
@@ -255,14 +245,12 @@ class StravaExtractor:
         # Simple consumer ("clean" segments still not analyzed)
         if self.user==0:
             ti = time.time()
-            self.get_runs_data()
-            print("Found {} running segments for {}. Time elapsed: {} s".format(len(self.runsData), city, round(time.time()-ti, 2)))
-            self.segments = self.decode_polyline(self.runsData)
-            self.load(self.segments, city)
-            self.get_rides_data()
-            print("Found {} riding segments for {}. Time elapsed: {} s".format(len(self.ridesData), city, round(time.time()-ti, 2)))
-            self.segments = self.decode_polyline(self.ridesData)
-            self.load(self.segments, city)
+            self.get_runs_data(self.city[0])
+            print("Extracted data for {} running segments for {}. Time elapsed: {} s".format(len(self.runsData), city, round(time.time()-ti, 2)))
+            self.load(self.runsData, city)
+            self.get_rides_data(self.city[0])
+            print("Extracted data for {} riding segments for {}. Time elapsed: {} s".format(len(self.ridesData), city, round(time.time()-ti, 2)))
+            self.load(self.ridesData, city)
         else:
             for city in self.city:
                 self.get_boundary(city)
@@ -270,36 +258,32 @@ class StravaExtractor:
                     ti = time.time()
                     self.get_segments(self.boundary, activity_type, self.city.index(city), False)
                     print("Found {} running segments for {}. Time elapsed: {} s".format(len(self.runs), city, round(time.time()-ti, 2)))
-                    self.get_runs_data()
-                    print("Found {} running segments for {}. Time elapsed: {} s".format(len(self.runsData), city, round(time.time()-ti, 2)))
-                    self.segments = self.decode_polyline(self.runsData)
-                    self.load(self.segments, city)
+                    self.get_runs_data(city)
+                    print("Extracted data for {} running segments for {}. Time elapsed: {} s".format(len(self.runsData), city, round(time.time()-ti, 2)))
+                    self.load(self.runsData, city)
                     self.r.sadd("strava:running:cities", city)
                 elif activity_type == "riding":
                     ti = time.time()
                     self.get_segments(self.boundary, activity_type, self.city.index(city), False)
                     print("Found {} riding segments for {}. Time elapsed: {} s".format(len(self.rides), city, round(time.time()-ti, 2)))
-                    self.get_rides_data()
-                    print("Found {} riding segments for {}. Time elapsed: {} s".format(len(self.ridesData), city, round(time.time()-ti, 2)))
-                    self.segments = self.decode_polyline(self.ridesData)
-                    self.load(self.segments, city)
+                    self.get_rides_data(city)
+                    print("Extracted data for {} riding segments for {}. Time elapsed: {} s".format(len(self.ridesData), city, round(time.time()-ti, 2)))
+                    self.load(self.ridesData, city)
                     self.r.sadd("strava:riding:cities", city)
                 else:
                     ti = time.time()
                     self.get_segments(self.boundary, "running", self.city.index(city), False)
                     print("Found {} running segments for {}. Time elapsed: {} s".format(len(self.runs), city, round(time.time()-ti, 2)))
-                    self.get_runs_data()
-                    print("Found {} running segments for {}. Time elapsed: {} s".format(len(self.runsData), city, round(time.time()-ti, 2)))
-                    self.segments = self.decode_polyline(self.runsData)
-                    self.load(self.segments, city)
+                    self.get_runs_data(city)
+                    print("Extracted data for {} running segments for {}. Time elapsed: {} s".format(len(self.runsData), city, round(time.time()-ti, 2)))
+                    self.load(self.runsData, city)
                     self.r.sadd("strava:running:cities", city)
                     ti = time.time()
                     self.get_segments(self.boundary, "riding", self.city.index(city), False)
                     print("Found {} riding segments for {}. Time elapsed: {} s".format(len(self.rides), city, round(time.time()-ti, 2)))
-                    self.get_rides_data()
-                    print("Found {} running segments for {}. Time elapsed: {} s".format(len(self.ridesData), city, round(time.time()-ti, 2)))
-                    self.segments = self.decode_polyline(self.ridesData)
-                    self.load(self.segments, city)
+                    self.get_rides_data(city)
+                    print("Extracted data for {} riding segments for {}. Time elapsed: {} s".format(len(self.ridesData), city, round(time.time()-ti, 2)))
+                    self.load(self.ridesData, city)
                     self.r.sadd("strava:riding:cities", city)
 
         if len(self.r.smembers("strava:running:code"))>0:

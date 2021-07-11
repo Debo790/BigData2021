@@ -17,8 +17,8 @@ CREATE TABLE IF NOT EXISTS segments (
     maximum_grade float, 
     elevation_high float,
     elevation_low float, 
-    total_elevation_gain float, 
-    geometry geometry
+    total_elevation_gain float,
+    city varchar
 );
 
 CREATE TABLE IF NOT EXISTS comuni (

@@ -31,15 +31,16 @@ class PostgresDB:
     def is_connected(self) -> bool:
         return bool(self.conn)
     
-    def create_tables(self):
+    def create_tables(self, geom: bool):
         
         with open("sql_scripts/init_tables.sql", "r") as f:
             query = f.read()
         for q in query.split(";")[:-1]:
             self.cursor.execute(q)
-        for table in ["osm", "segments"]:
-            set_crs = "select UpdateGeometrySRID('{}','geometry',4326);".format(table)
-            self.cursor.execute(set_crs)
+        if geom:
+            for table in ["osm"]:
+                set_crs = "select UpdateGeometrySRID('{}','geometry',4326);".format(table)
+                self.cursor.execute(set_crs)
         print("Tables created.")
     
     def insert_gdf(self, gdf: GeoDataFrame, name: str):
@@ -54,7 +55,7 @@ class PostgresDB:
         con = engine.connect()
 
         with self.connect():
-            self.create_tables()
+            self.create_tables(geom=True)
 
         gdf.to_postgis("{}".format(name).casefold(), engine, if_exists='append', chunksize=None)
         con.close()
@@ -71,7 +72,7 @@ class PostgresDB:
         con = engine.connect()
 
         with self.connect():
-            self.create_tables()
+            self.create_tables(geom=False)
 
         df.to_sql("{}".format(name).casefold(), con, schema=None, if_exists='append', chunksize=None, index=False)
         con.close()
