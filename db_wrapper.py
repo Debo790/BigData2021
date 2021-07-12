@@ -38,7 +38,7 @@ class PostgresDB:
         for q in query.split(";")[:-1]:
             self.cursor.execute(q)
         if geom:
-            for table in ["osm"]:
+            for table in ["osm", "comuni"]:
                 set_crs = "select UpdateGeometrySRID('{}','geometry',4326);".format(table)
                 self.cursor.execute(set_crs)
         print("Tables created.")
