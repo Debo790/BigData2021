@@ -18,16 +18,18 @@ CREATE TABLE IF NOT EXISTS segments (
     elevation_high float,
     elevation_low float, 
     total_elevation_gain float,
+    polyline text,
     city varchar
 );
 
 CREATE TABLE IF NOT EXISTS comuni (
-    istat_comune bigint primary key,
-    regione text,
-    nome text,
-    nome_secondario text,
+    istat_code bigint primary key,
+    population bigint,
+    region text,
+    name text,
+    secondary_name text,
     area double precision,
-    popolazione bigint
+    geometry geometry
 );
 
 CREATE TABLE IF NOT EXISTS coni (

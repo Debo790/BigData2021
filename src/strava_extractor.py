@@ -123,7 +123,7 @@ class StravaExtractor:
         headers = {'Authorization':auth["token_type"]+ " " + auth["access_token"]}
 
         cols = ['id', 'name', 'activity_type', 'effort_count', 'athlete_count', 'distance', 'average_grade', 
-        'maximum_grade', 'elevation_high', 'elevation_low', 'total_elevation_gain']
+        'maximum_grade', 'elevation_high', 'elevation_low', 'total_elevation_gain', 'polyline']
         self.runsData = pd.DataFrame(columns=cols)
         index = 0
         if consumer:
@@ -131,7 +131,7 @@ class StravaExtractor:
                 req = requests.get("https://www.strava.com/api/v3/segments/{}".format(i.decode("utf-8")), headers=headers).json()
                 self.runsData.loc[index] = np.array([req["id"], req["name"], req["activity_type"], req["effort_count"], req["athlete_count"], 
                     req["distance"], req["average_grade"], req["maximum_grade"], req["elevation_high"], 
-                    req["elevation_low"], req["total_elevation_gain"]])
+                    req["elevation_low"], req["total_elevation_gain"], req["map"]["polyline"]])
                 index = index+1
                 self.r.srem("strava:running:code", i.decode("utf-8"))
                 # Query limit counter
@@ -144,7 +144,7 @@ class StravaExtractor:
                 req = requests.get("https://www.strava.com/api/v3/segments/{}".format(segmentId), headers=headers).json()
                 self.runsData.loc[index] = np.array([req["id"], req["name"], req["activity_type"], req["effort_count"], req["athlete_count"], 
                     req["distance"], req["average_grade"], req["maximum_grade"], req["elevation_high"], 
-                    req["elevation_low"], req["total_elevation_gain"]])
+                    req["elevation_low"], req["total_elevation_gain"], req["map"]["polyline"]])
                 index = index+1
                 self.r.srem("strava:running:code", segmentId)
                 # Query limit counter
@@ -165,7 +165,7 @@ class StravaExtractor:
         headers = {'Authorization':auth["token_type"]+ " " + auth["access_token"]}
 
         cols = ['id', 'name', 'activity_type', 'effort_count', 'athlete_count', 'distance', 'average_grade', 
-        'maximum_grade', 'elevation_high', 'elevation_low', 'total_elevation_gain']
+        'maximum_grade', 'elevation_high', 'elevation_low', 'total_elevation_gain', 'polyline']
         self.ridesData = pd.DataFrame(columns=cols)
         index = 0
         if consumer:
@@ -173,7 +173,7 @@ class StravaExtractor:
                 req = requests.get("https://www.strava.com/api/v3/segments/{}".format(i.decode("utf-8")), headers=headers).json()
                 self.ridesData.loc[index] = np.array([req["id"], req["name"], req["activity_type"], req["effort_count"], req["athlete_count"], 
                     req["distance"], req["average_grade"], req["maximum_grade"], req["elevation_high"], 
-                    req["elevation_low"], req["total_elevation_gain"]])
+                    req["elevation_low"], req["total_elevation_gain"], req["map"]["polyline"]])
                 index = index+1
                 self.r.srem("strava:riding:code", i.decode("utf-8"))
                 # Query limit counter
@@ -186,7 +186,7 @@ class StravaExtractor:
                 req = requests.get("https://www.strava.com/api/v3/segments/{}".format(segmentId), headers=headers).json()
                 self.ridesData.loc[index] = np.array([req["id"], req["name"], req["activity_type"], req["effort_count"], req["athlete_count"], 
                     req["distance"], req["average_grade"], req["maximum_grade"], req["elevation_high"], 
-                    req["elevation_low"], req["total_elevation_gain"]])
+                    req["elevation_low"], req["total_elevation_gain"], req["map"]["polyline"]])
                 index = index+1
                 self.r.srem("strava:riding:code", segmentId)
                 # Query limit counter
