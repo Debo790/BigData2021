@@ -83,10 +83,6 @@ class Analyzer():
         self.r.zadd("sport:index", {city: score})
         self.r.save()
 
-        
-
-
-
     def run(self) -> bool:
         for i in self.r.smembers("strava:running:cities"):
             self.city = i.decode("utf-8")

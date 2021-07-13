@@ -4,6 +4,7 @@ geopandas
 osm2geojson
 shapely
 psycopg2-binary
+polyline
 sqlalchemy
 geoalchemy2
 redis
