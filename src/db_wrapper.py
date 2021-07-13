@@ -94,12 +94,13 @@ class PostgresDB:
                             config['postgresql']['port'] + "/" +
                             config['postgresql']['database'])
         con = engine.connect()
-        #self.connect()
-        #assert self.is_connected()
-        return gpd.read_postgis(query, engine, geom_col="geometry")
+        self.connect()
+        assert self.is_connected()
+        res = gpd.read_postgis(query, engine, geom_col="geometry")
+        return res
 
 
-    def return_df(self, query: str) -> pd.DataFrame:
+    def return_df(self, query: str, cols: list) -> pd.DataFrame:
         config = configparser.ConfigParser()
         config.read('conf/config.ini')
         engine = create_engine("postgres://" + config['postgresql']['user'] + ":" +
@@ -112,7 +113,8 @@ class PostgresDB:
         assert self.is_connected()
         self.cursor.execute(query)
         res = self.cursor.fetchall()
-        return res
+        df = pd.DataFrame.from_records(data=res, columns=cols)
+        return df
         
 
 
