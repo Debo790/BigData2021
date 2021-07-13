@@ -276,9 +276,13 @@ class StravaExtractor:
             self.get_runs_data(self.city[0], consumer=True)
             print("Extracted data for {} running segments for {}. Time elapsed: {} s".format(len(self.runsData), self.city[0], round(time.time()-ti, 2)))
             self.load(self.runsData, self.city[0])
+            self.r.sadd("strava:running:cities", self.city[0])
+            self.r.save()
             self.get_rides_data(self.city[0], consumer=True)
             print("Extracted data for {} riding segments for {}. Time elapsed: {} s".format(len(self.ridesData), self.city[0], round(time.time()-ti, 2)))
             self.load(self.ridesData, self.city[0])
+            self.r.sadd("strava:riding:cities", self.city[0])
+            self.r.save()
         else:
             for city in self.city:
                 self.get_boundary(city)
@@ -336,7 +340,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    city = args.city
+    userCities = args.city
+    city = []
     activity_type = args.activity
     user = args.user
 
@@ -344,8 +349,29 @@ if __name__ == "__main__":
         print("ACTIVITY ERROR: Please, insert a supported activity (running/riding/all)")
         sys.exit(0)
 
-    ce = StravaExtractor(city, r, user)
-    success = ce.run(activity_type)
+    for i in userCities:
+        if activity_type=="running":
+            if r.sismember("strava:running:cities", i):
+                print("{}'s running data already in database. Skipping.".format(i))
+            else:
+                city.append(i)
+        elif activity_type=="riding":
+            if r.sismember("strava:riding:cities", i):
+                print("{}'s riding data already in database. Skipping.".format(i))
+            else:
+                city.append(i)
+        else:
+            if r.sismember("strava:running:cities", i) and r.sismember("strava:riding:cities", i):
+                print("{}'s running and riding data already in database. Skipping.".format(i))
+            else:
+                city.append(i)
 
-    if success:
-        print("Done.")
+    if city is not None:
+        ce = StravaExtractor(city, r, user)
+        success = ce.run(activity_type)
+
+        if success:
+            print("Done.")
+
+    
+    
