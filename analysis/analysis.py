@@ -4,8 +4,11 @@ import redis
 import pandas as pd
 import geopandas as gpd
 import argparse
+import polyline
+import shapely.geometry as shp
 sys.path.append(os.getcwd())
 import src.db_wrapper as wrapper
+
 
 class Analyzer():
 
@@ -13,11 +16,24 @@ class Analyzer():
         self.db = wrapper.PostgresDB()
         self.r = r
         self.city = city
-        self.strava = pd.DataFrame
+        self.strava = None
         self.osm = gpd.GeoDataFrame
         self.coni = pd.DataFrame
         self.municipality = gpd.GeoDataFrame
     
+
+    def decode_polyline(self):
+        self.strava["geometry"] = None
+        for i in range(len(self.strava)):
+            pointList = polyline.decode(self.strava.loc[i,"polyline"])
+            if len(pointList)>1:
+                poly = shp.LineString([[p[0], p[1]] for p in pointList])
+                self.strava.loc[i,"geometry"] = poly
+        self.strava = self.strava.drop(columns=["polyline"])
+        self.strava = gpd.GeoDataFrame(self.strava)
+        self.strava = self.strava.set_crs(epsg=4326)
+
+
     def get_osm(self, city: str):
         self.osm = self.db.return_gdf("select * from osm where city='{}'".format(city))
         print("osm: {}".format(len(self.osm)))
@@ -57,25 +73,35 @@ class Analyzer():
         population = self.municipality["population"][0]
         area = self.municipality["area"][0]
         density = round(population/area, 2)
+        score = (sport_items + societies*(0.25*practicing+0.75*agonist) + (segments + total_effort/total_athletes))/density
         print("---- {} ----".format(city))
         print("population: {}, area: {}, density: {}".format(population, area, density))
         print("items: {}, societies: {}, agonists: {}, practicers: {}".format(sport_items, societies, agonist, practicing))
         print("total segments: {}, total efforts: {}, distinct athletes: {}".format(segments, total_effort, total_athletes))
+        print("Score for {}: {}".format(city, score))
+
+        self.r.zadd("sport:index", {city: score})
+        self.r.save()
+
+        
 
 
 
     def run(self) -> bool:
-        self.get_osm(self.city)
-        self.get_coni(self.city)
-        self.get_strava(self.city)
-        self.get_municipality(self.city)
-        self.compute_index(self.city)
+        for i in self.r.smembers("strava:running:cities"):
+            self.city = i.decode("utf-8")
+            self.get_osm(self.city)
+            self.get_coni(self.city)
+            self.get_strava(self.city)
+            self.decode_polyline()
+            self.get_municipality(self.city)
+            self.compute_index(self.city)
         
         return True
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="BDT Project 2021 - Data analysis")
-    parser.add_argument("--city", type=str, help="the city to extract", required=True)
+    parser.add_argument("--city", type=str, help="the city to extract")
     args = parser.parse_args()
     city = args.city
 
