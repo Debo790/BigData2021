@@ -1,5 +1,3 @@
-from ctypes import create_string_buffer
-from types import MethodDescriptorType
 from geopandas.geodataframe import GeoDataFrame
 from pandas.core.frame import DataFrame
 import psycopg2
@@ -112,11 +110,10 @@ class PostgresDB:
         self.connect()
         assert self.is_connected()
         self.cursor.execute(query)
-        res = self.cursor.fetchall()
-        df = pd.DataFrame.from_records(data=res, columns=cols)
-        return df
+        data = self.cursor.fetchall()
+        res = pd.DataFrame.from_records(data=data, columns=cols)
+        return res
         
-
 
     def close(self):
 
