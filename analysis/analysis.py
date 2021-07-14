@@ -73,12 +73,13 @@ class Analyzer():
         population = self.municipality["population"][0]
         area = self.municipality["area"][0]
         density = round(population/area, 2)
-        score = (sport_items + societies*(0.25*practicing+0.75*agonist) + (segments + total_effort/total_athletes))/density
+        score = (sport_items/area + societies*(0.25*practicing+0.75*agonist) + (segments + total_effort/total_athletes))/population
         print("---- {} ----".format(city))
         print("population: {}, area: {}, density: {}".format(population, area, density))
         print("items: {}, societies: {}, agonists: {}, practicers: {}".format(sport_items, societies, agonist, practicing))
         print("total segments: {}, total efforts: {}, distinct athletes: {}".format(segments, total_effort, total_athletes))
         print("Score for {}: {}".format(city, score))
+        print("-----------------------------")
 
         self.r.zadd("sport:index", {city: score})
         self.r.save()
