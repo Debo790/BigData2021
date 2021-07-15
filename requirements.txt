@@ -5,6 +5,7 @@ osm2geojson
 shapely
 psycopg2-binary
 polyline
+flask
 sqlalchemy
 geoalchemy2
 redis
