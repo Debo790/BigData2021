@@ -48,7 +48,7 @@ class PostgresDB:
         
         config = configparser.ConfigParser()
         config.read('conf/config.ini')
-        engine = create_engine("postgres://" + config['postgresql']['user'] + ":" +
+        engine = create_engine("postgresql://" + config['postgresql']['user'] + ":" +
                             config['postgresql']['password'] + "@" +
                             config['postgresql']['host'] + ":" + 
                             config['postgresql']['port'] + "/" +
@@ -66,7 +66,7 @@ class PostgresDB:
         
         config = configparser.ConfigParser()
         config.read('conf/config.ini')
-        engine = create_engine("postgres://" + config['postgresql']['user'] + ":" +
+        engine = create_engine("postgresql://" + config['postgresql']['user'] + ":" +
                             config['postgresql']['password'] + "@" +
                             config['postgresql']['host'] + ":" + 
                             config['postgresql']['port'] + "/" +
@@ -86,7 +86,7 @@ class PostgresDB:
 
         config = configparser.ConfigParser()
         config.read('conf/config.ini')
-        engine = create_engine("postgres://" + config['postgresql']['user'] + ":" +
+        engine = create_engine("postgresql://" + config['postgresql']['user'] + ":" +
                             config['postgresql']['password'] + "@" +
                             config['postgresql']['host'] + ":" + 
                             config['postgresql']['port'] + "/" +
@@ -101,7 +101,7 @@ class PostgresDB:
     def return_df(self, query: str, cols: list) -> pd.DataFrame:
         config = configparser.ConfigParser()
         config.read('conf/config.ini')
-        engine = create_engine("postgres://" + config['postgresql']['user'] + ":" +
+        engine = create_engine("postgresql://" + config['postgresql']['user'] + ":" +
                             config['postgresql']['password'] + "@" +
                             config['postgresql']['host'] + ":" + 
                             config['postgresql']['port'] + "/" +

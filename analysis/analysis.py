@@ -20,6 +20,7 @@ class Analyzer():
         self.osm = gpd.GeoDataFrame
         self.coni = pd.DataFrame
         self.municipality = gpd.GeoDataFrame
+        self.top10 = None
     
 
     def decode_polyline(self):
@@ -65,6 +66,13 @@ class Analyzer():
         self.r.set("{}:segments:athletes".format(city), athletes)
         self.r.set("{}:population".format(city), int(self.municipality["population"][0]))
         self.r.set("{}:area".format(city), int(self.municipality["area"][0]))
+        for i in range(len(self.top10)):
+            self.r.hmset("{}:top10".format(city), {"name{}".format(i): str(self.top10["name"][i]), 
+                                                    "type{}".format(i): str(self.top10["type"][i]),
+                                                    "effort_count{}".format(i): str(self.top10["effort_count"][i]),
+                                                    "athlete_count{}".format(i): str(self.top10["athlete_count"][i]),
+                                                    "distance{}".format(i): str(self.top10["distance"][i]),
+                                                    "geometry{}".format(i): str(self.top10["geometry"][i]),})
         self.r.save()
 
     def compute_index(self, city: str):
@@ -97,7 +105,7 @@ class Analyzer():
 
         self.r.zadd("sport:index", {city: score})
         self.r.save()
-        self.update(self.city, agonist, practicing, total_effort, total_athletes)
+        self.update(city, agonist, practicing, total_effort, total_athletes)
         self.r.save()
 
     def run(self) -> bool:
@@ -107,6 +115,7 @@ class Analyzer():
             self.coni = self.get_coni(self.city)
             self.strava = self.get_strava(self.city)
             self.decode_polyline()
+            self.top10 = self.strava.sort_values("effort_count", ascending=False).head(10).reset_index(drop=True)
             self.municipality = self.get_municipality(self.city)
             self.compute_index(self.city)
 
