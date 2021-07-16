@@ -9,21 +9,25 @@
         <title>Sport indexes</title>
     {% endif %}
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../css/main.css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-    <div style="vertical-align: middle;">
-        <h1>Sport indexes</h1>
-        <table border=2>
+    <div class="container" style="text-align: center;">
+        <h1>Sport indexes - Italian cities</h1>
+        <p>This is an application that allows to get an overview of the sportivity of each italian city.<br>
+        Results are obtained from a combination of multiple components: data from Open Street Map, CONI and Strava <br>
+        contribute to define the final score for each city. Click on a city of your interest to learn more!</p>
+        <table border="2px solid black" style="width: 400px; margin-left: auto; margin-right: auto">
             <tr>
                 <th>City</th>
-                <td>Score</td>
+                <th>Score</th>
             </tr>   
             
         
             {% for i in posts %}
+            {% set city = i[0].decode("utf-8") %}
                 <tr>
-                    <th>{{i[0].decode("utf-8")}}</th>
+                    <th onclick="window.location='./{{city}}'">{{ city }}</th>
                     <td>{{i[1]}}</td>
                 </tr>
                 

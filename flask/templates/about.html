@@ -10,9 +10,41 @@
     {% else %}
         <title>Sport indexes</title>
     {% endif %}
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
 </head>
 <body>
-    
+    <div class="container" style="text-align: center;">
+        <h1>Sport indexes - {{ title }} </h1>
+        <p>
+            {{ title }} is a city of {{ population.decode("utf-8") }} inhabitants, and its territory covers an area of {{ area.decode("utf-8") }} km2.<br>
+            It presents a total of {{ coni.decode("utf-8") }} societies registered to CONI, formed by {{ agonist.decode("utf-8") }} agonist athletes and {{ practicing.decode("utf-8") }} practicers.<br>
+            {{ osm.decode("utf-8") }} Open Street Map elements are featured for this city, including gyms, swimming pools and hiking routes.<br>
+            Here you can find the top 10 segments out of the {{ segments.decode("utf-8")}} featured on Strava for {{ title }}, based on their number of total effort count. 
+        </p>
+        <table border="2px solid black" style="margin-left: auto; margin-right: auto">
+            <tr>
+                <th>Segment name</th>
+                <th>Activity type</th>
+                <th>Total efforts</th>
+                <th>Distinct athletes</th>
+                <th>Segment length (m)</th>
+            </tr>   
+            
+            {% for x in range(10): %}
+            <tr style="text-align: center;">
+                {% for i in result[(x*6):(x*6)+5] %}
+
+                    
+                        <td>{{i.decode("utf-8")}}</td>
+                        
+                    
+                    
+            
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 </body>
 </html>

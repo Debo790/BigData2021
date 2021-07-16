@@ -6,16 +6,18 @@ import geopandas as gpd
 import argparse
 import polyline
 import shapely.geometry as shp
+import schedule
+import time
 sys.path.append(os.getcwd())
 import src.db_wrapper as wrapper
 
 
 class Analyzer():
 
-    def __init__(self, r: redis.Redis, city: str) -> None:
+    def __init__(self, r: redis.Redis) -> None:
         self.db = wrapper.PostgresDB()
         self.r = r
-        self.city = city
+        self.city = None
         self.strava = None
         self.osm = gpd.GeoDataFrame
         self.coni = pd.DataFrame
@@ -67,12 +69,12 @@ class Analyzer():
         self.r.set("{}:population".format(city), int(self.municipality["population"][0]))
         self.r.set("{}:area".format(city), int(self.municipality["area"][0]))
         for i in range(len(self.top10)):
-            self.r.hmset("{}:top10".format(city), {"name{}".format(i): str(self.top10["name"][i]), 
-                                                    "type{}".format(i): str(self.top10["type"][i]),
-                                                    "effort_count{}".format(i): str(self.top10["effort_count"][i]),
-                                                    "athlete_count{}".format(i): str(self.top10["athlete_count"][i]),
-                                                    "distance{}".format(i): str(self.top10["distance"][i]),
-                                                    "geometry{}".format(i): str(self.top10["geometry"][i]),})
+            self.r.hmset("{}:top10".format(city), {"{}0:name".format(i): str(self.top10["name"][i]), 
+                                                    "{}1:type".format(i): str(self.top10["type"][i]),
+                                                    "{}2:effort_count".format(i): str(self.top10["effort_count"][i]),
+                                                    "{}3:athlete_count".format(i): str(self.top10["athlete_count"][i]),
+                                                    "{}4:distance".format(i): str(self.top10["distance"][i]),
+                                                    "{}5:geometry".format(i): str(self.top10["geometry"][i]),})
         self.r.save()
 
     def compute_index(self, city: str):
@@ -124,21 +126,26 @@ class Analyzer():
         for i in self.r.zrevrange("sport:index", 0, -1, withscores=True):
             print(i[0].decode("utf-8"), i[1])
 
+        print("--------------------")
         print("Top 10:")
         for i in r.zrevrangebyscore("sport:index", 100, 0, withscores=True, start=0, num=10):
             print(i[0].decode("utf-8"), i[1])
-        return True
+        print("-------------------------------")
+        print("----- Analysis completed. -----")
+        print("-------------------------------")
+        
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="BDT Project 2021 - Data analysis")
-    parser.add_argument("--city", type=str, help="the city to extract")
-    args = parser.parse_args()
-    city = args.city
-
+    
+    
     r = redis.Redis(host='localhost', port=6379, db=0)
 
-    an = Analyzer(r, city)
-    if an.run():
-        print("Done.")
+    an = Analyzer(r)
+    schedule.every(30).minutes.do(an.run)
+    while 1:
+        schedule.run_pending()
+        time.sleep(1)
+    
 
     
