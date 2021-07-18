@@ -233,8 +233,8 @@ class StravaExtractor:
                 for i in range(len(req["segments"])):
                     self.runs.add(req["segments"][i]["id"])
                     self.r.sadd("strava:running:code", req["segments"][i]["id"])
-                    with open('tmp/running.json', 'a') as f:
-                        json.dump(req, f, indent=4)
+                    # with open('tmp/running.json', 'a') as f:
+                    #     json.dump(req, f, indent=4)
                 if len(req["segments"])==10:
                     newBoundary = self.reduce_boundary(currentBoundary, city)
                     for i in range(len(newBoundary)):
@@ -246,8 +246,8 @@ class StravaExtractor:
                 for i in range(len(req["segments"])):
                     self.rides.add(req["segments"][i]["id"])
                     self.r.sadd("strava:riding:code", req["segments"][i]["id"])
-                    with open('tmp/riding.json', 'a') as f:
-                        json.dump(req, f, indent=4)
+                    # with open('tmp/riding.json', 'a') as f:
+                    #     json.dump(req, f, indent=4)
                 if len(req["segments"])==10:
                     newBoundary = self.reduce_boundary(currentBoundary, city)
                     for i in range(len(newBoundary)):

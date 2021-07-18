@@ -10,19 +10,33 @@
     {% else %}
         <title>Sport indexes</title>
     {% endif %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    
+    <!-- Leaflet library -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+
+    <style>
+        #map {margin-top: 50px; bottom: 0; margin-left: auto; margin-right: auto; height: 500px; width: 600px;}
+    </style>
 </head>
 <body>
     <div class="container" style="text-align: center;">
         <h1>Sport indexes - {{ title }} </h1>
-        <p>
-            {{ title }} is a city of {{ population.decode("utf-8") }} inhabitants, and its territory covers an area of {{ area.decode("utf-8") }} km2.<br>
-            It presents a total of {{ coni.decode("utf-8") }} societies registered to CONI, formed by {{ agonist.decode("utf-8") }} agonist athletes and {{ practicing.decode("utf-8") }} practicers.<br>
-            {{ osm.decode("utf-8") }} Open Street Map elements are featured for this city, including gyms, swimming pools and hiking routes.<br>
-            Here you can find the top 10 segments out of the {{ segments.decode("utf-8")}} featured on Strava for {{ title }}, based on their number of total effort count. 
+        <p style="margin-bottom: 5px;">
+            {{ title }} is a city of {{ population }} inhabitants, and its territory covers an area of {{ area }} km2.<br>
+            It presents a total of {{ coni }} societies registered to CONI, formed by {{ agonist }} agonist athletes and {{ practicing }} practicers.<br>
+            {{ osm }} Open Street Map elements are featured for this city, including gyms, swimming pools and hiking routes.<br>
+            Here you can find the top 10 segments out of the {{ segments}} featured on Strava for {{ title }}, ordered by their number of total effort count. 
         </p>
-        <table border="2px solid black" style="margin-left: auto; margin-right: auto">
+        <table border="2px solid black" style="margin-left: auto; margin-right: auto;">
             <tr>
                 <th>Segment name</th>
                 <th>Activity type</th>
@@ -30,21 +44,56 @@
                 <th>Distinct athletes</th>
                 <th>Segment length (m)</th>
             </tr>   
-            
+            {% set result = result %}
             {% for x in range(10): %}
             <tr style="text-align: center;">
                 {% for i in result[(x*6):(x*6)+5] %}
-
-                    
                         <td>{{i.decode("utf-8")}}</td>
-                        
-                    
-                    
-            
                 {% endfor %}
             </tr>
             {% endfor %}
         </table>
+
+        
     </div>
+    <div id="map" style="margin-top: 10px;"></div>
+        <script>
+            var title = document.title;
+            city = title.split(" ");
+            var map = L.map('map').setView([42.009371, 12.529733], 5);
+            var myStyle = {
+                "color": "orange",
+                "weight": 7,
+                "opacity": 0.85
+            };
+
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                            maxZoom: 18,
+                            id: 'mapbox/outdoors-v11',
+                            tileSize: 512,
+                            zoomOffset: -1,
+                            accessToken: 'pk.eyJ1IjoiZGVibzc5MCIsImEiOiJja3I3b202Nm8zYXBmMnJueGhvN3RleHd6In0.ffJmPoJ_c_GL6tOSPGDTOA'
+                        }).addTo(map);
+
+
+            fetch('https://raw.githubusercontent.com/Debo790/BigData2021/main/flask/data/' + city[3] + '.json')
+                .then(function (response){
+                    return response.json();
+                })
+                .then(function (data){
+                    L.geoJSON(data, {
+                        style: myStyle
+                    }).bindPopup(function (layer) {
+                        var popupContent = "Name: " + layer.feature.properties.name + "<br>";
+                        popupContent += "Activity type: " + layer.feature.properties.type + "<br>";
+                        popupContent += "Effort count: " + layer.feature.properties.effort_count + "<br>";
+                        popupContent += "Athletes count: " + layer.feature.properties.athlete_count + "<br>";
+                        popupContent += "Distance (m): " + layer.feature.properties.distance;
+                        return popupContent;
+                    }).addTo(map);
+                })
+        </script>    
+
 </body>
 </html>

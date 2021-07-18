@@ -31,13 +31,13 @@ def about():
 def test(city):
     results = r.hgetall("{}:top10".format(city))
     res = collections.OrderedDict(sorted(results.items()))
-    coni = r.get("{}:coni".format(city))
-    agonist = r.get("{}:coni:agonist".format(city))
-    practicing = r.get("{}:coni:practicing".format(city))
-    osm = r.get("{}:osm".format(city))
-    population = r.get("{}:population".format(city))
-    area = r.get("{}:area".format(city))
-    segments = r.get("{}:segments".format(city))
+    coni = r.get("{}:coni".format(city)).decode("utf-8")
+    agonist = r.get("{}:coni:agonist".format(city)).decode("utf-8")
+    practicing = r.get("{}:coni:practicing".format(city)).decode("utf-8")
+    osm = r.get("{}:osm".format(city)).decode("utf-8")
+    population = r.get("{}:population".format(city)).decode("utf-8")
+    area = r.get("{}:area".format(city)).decode("utf-8")
+    segments = r.get("{}:segments".format(city)).decode("utf-8")
     return render_template('about.html', title=city, result = list(res.values()), coni = coni, agonist = agonist, practicing = practicing, osm = osm, population = population, area = area, segments = segments)
     
 

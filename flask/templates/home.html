@@ -27,7 +27,7 @@
             {% for i in posts %}
             {% set city = i[0].decode("utf-8") %}
                 <tr>
-                    <th onclick="window.location='./{{city}}'">{{ city }}</th>
+                    <th onclick="window.location='./{{city}}'" style="cursor: pointer;">{{ city }}</th>
                     <td>{{i[1]}}</td>
                 </tr>
                 

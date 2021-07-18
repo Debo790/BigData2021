@@ -6,8 +6,10 @@ import geopandas as gpd
 import argparse
 import polyline
 import shapely.geometry as shp
+import shapely.ops as ops
 import schedule
 import time
+import json
 sys.path.append(os.getcwd())
 import src.db_wrapper as wrapper
 
@@ -76,10 +78,15 @@ class Analyzer():
                                                     "{}4:distance".format(i): str(self.top10["distance"][i]),
                                                     "{}5:geometry".format(i): str(self.top10["geometry"][i]),})
         self.r.save()
+        for_flask = self.top10
+        for_flask.geometry = for_flask.geometry.map(lambda polygon: ops.transform(lambda x, y:(y,x), polygon))
+        for_flask.to_file("flask/data/{}.json".format(city), driver="GeoJSON")
+
 
     def compute_index(self, city: str):
         
         # Get all parameters
+        print("---- {} ----".format(city))
         sport_items = len(self.osm)
         societies = len(self.coni)
         agonist = sum(self.coni["agonism"])
@@ -91,18 +98,17 @@ class Analyzer():
         area = self.municipality["area"][0]
         density = round(population/area, 2)
         osm_component = (sport_items/area)
-        coni_component = (societies*(0.25*practicing+0.75*agonist)/population)
-        strava_component = ((segments*total_effort/total_athletes)/density)
-        score = (sport_items/area + (societies*(0.25*practicing+0.75*agonist))/population + (segments * total_effort/total_athletes)/density)
-        score = (osm_component*0.2 + coni_component*0.2 + strava_component*0.6)/population*10000
-        print("---- {} ----".format(city))
+        coni_component = (societies+0.40*practicing+0.60*agonist)/population
+        strava_component = ((segments*(total_effort/total_athletes))/density)
+        score = round(osm_component*0.3 + coni_component*0.2 + strava_component*0.5, 3)
+        
         print("population: {}, area: {}, density: {}".format(population, area, density))
         print("items: {}, societies: {}, agonists: {}, practicers: {}".format(sport_items, societies, agonist, practicing))
         print("total segments: {}, total efforts: {}, distinct athletes: {}".format(segments, total_effort, total_athletes))
         print("coni component: {}".format(coni_component))
         print("osm_component: {}".format(osm_component))
         print("strava_component: {}".format(strava_component))
-        print("Score for {}= (osm_component*0.2 + coni_component*0.2 + strava_component*0.6)/population*10000 = {}".format(city, score))
+        print("Score for {}= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = {}".format(city, score))
         print("-----------------------------")
 
         self.r.zadd("sport:index", {city: score})
@@ -142,7 +148,7 @@ if __name__ == "__main__":
     r = redis.Redis(host='localhost', port=6379, db=0)
 
     an = Analyzer(r)
-    schedule.every(30).minutes.do(an.run)
+    schedule.every(5).seconds.do(an.run)
     while 1:
         schedule.run_pending()
         time.sleep(1)

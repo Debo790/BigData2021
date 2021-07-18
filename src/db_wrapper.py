@@ -95,6 +95,7 @@ class PostgresDB:
         self.connect()
         assert self.is_connected()
         res = gpd.read_postgis(query, engine, geom_col="geometry")
+        con.close()
         return res
 
 
@@ -112,6 +113,7 @@ class PostgresDB:
         self.cursor.execute(query)
         data = self.cursor.fetchall()
         res = pd.DataFrame.from_records(data=data, columns=cols)
+        con.close()
         return res
         
 
