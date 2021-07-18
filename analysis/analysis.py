@@ -148,7 +148,7 @@ if __name__ == "__main__":
     r = redis.Redis(host='localhost', port=6379, db=0)
 
     an = Analyzer(r)
-    schedule.every(5).seconds.do(an.run)
+    schedule.every(30).minutes.do(an.run)
     while 1:
         schedule.run_pending()
         time.sleep(1)
