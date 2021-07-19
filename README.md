@@ -1,12 +1,13 @@
-# BigData2021 - Sport index from OSM and Strava
+# BigData2021 - Sport indexes for italian cities
 
-First running tips, improvements to this readme will follow.
+This project aims to classify italian cities based on how much their inhabitants are sportive. A sport index is calculated for each city considering how many OpenStreetMap sport features are present in its territory, how many societies are registered to CONI and how many segments are featured on Strava for that city.  
+Results are displayed in a simple webapp where user can see the leaderboard and the most important Strava segments for each city.
 
 ## Usage
 
-Remember to run the scripts from root directory. Parameter ```-W ignore``` is not required but suggested, since it will prevent possible warning messages related to geopandas dependencies.
+All the scripts should be run from root directory. Parameter ```-W ignore``` is not required but suggested, since it will prevent possible warning messages related to geopandas dependencies.
 
-Scripts are tested on Linux. Windows shows issues with some geopandas dependencies, but if the module is already installed it should run without inconvenients. In any case, the following guide is referred to a Unix environment.
+The following guide refers to a Unix environment. All the scripts have been tested on Linux.
 
 ### Virtual environment setup
 
@@ -29,53 +30,36 @@ Install required dependencies:
 pip install -r requirements.txt
 ```
 
-## Data collection
+## Credentials
 
-### OpenStreetMap
+To communicate with the database, the file ```conf/config.ini``` has to be created. A sample is available at ```conf/config_sample.ini``` (section: postgresql).  
+The setup of a Strava user credentials is not required to run a demo, but if you want to add more cities to the available ones the required parameters has to be specified in the same file (e.g. for the user 0, section: strava0) and in the authentication one (e.g. for the user 0 ```conf/auth_user0.json```). A sample is provided at ```conf/auth_usernumber.json```, while a proper walkthrough can be found [here](https://github.com/franchyze923/Code_From_Tutorials/blob/master/Strava_Api/request_links.txt). 
 
-Extract sportive nodes, ways and routes for the specified city/cities. The update parameter forces data collection even if the city's data are already stored in db (useful for debug purpose, use it only if necessary).
-Multiple cities can be passed as parameters, suggested limit is 3 due to not overload Overpass API.
+# Quick start
 
-```
-python3 -W ignore src/osm_extractor.py --city [insert city/cities] [--update]
-```
+After having set up credentials, run:
 
-Data are stored in a Postgres database, while the list of cities is available in Redis (key: osm:cities).
+```python3 setup.py```
 
-### Strava
+to create the database and load the dump. Then, start redis-server and load ```tmp/dump.rdb```.
 
-To retrieve Strava running and riding data for a specific city/cities, run the following command:
+To visualize the demo, run:
 
-```
-python3 -W ignore src/strava_extractor.py --city [insert city/cities] --activity [riding/running/all] --user [user]
-```
+```python3 flask/app.py```
 
-Data are stored in a Postgres database, while the list of cities is available in Redis (key: osm:cities). 
-Activity parameter added, it's not required and default is "running". Available options are riding, running and all (riding+running).
-Multiple cities can be passed as parameters, but if too many results are retrieved it can take quite a long time due to Strava limitations (1000 queries/day per user).
+You can now access the demo at ```https://localhost:5000/``` to have an overview of the index leaderboard. Further details about any city can be found by clicking the city's name or by typing ```https://localhost:5000/{city}```.
 
-Configuration data are stored in conf/config.ini and conf/auth_\[user\].json (private). 
+## Packages
 
-### Demographics
+* Analysis: contains the script to run the analysis and compute the index and the partial results
+* Flask: contains files and data required exclusively for the demo
+* Src: contains ETL scripts and helper modules
+* Conf: contains configuration files related to DB and Strava user(s)
 
-To store demographics data related to Italy's municipalites, run the following command:
+Further details are provided in each directory, along with command intructions.
 
-```
-python3 -W ignore src/extract_comuni.py
-```
-Data will be stored in a Postgres database. 
+### Contacts
 
-### CONI
-
-To store CONI data related to societies affiliate to CONI, run the following command:
-```
-python3 -W ignore src/coni_extractor.py [--to_json]
-```
-If parameter to_json is present, results are stored in ```tmp/dati_CONI.json```. This is suggested only for debug purpose.
-The whole process can take a while, so it's better to change range parameters (line 33) to get faster results. Data are already stored in a Postgres database anyway.
-
-## Metrics calculation
-
-Metrics should be calculated when retrieved from DB.
-
-They should be stored in a middle-layer DB to be presented to the final user.
+For any additional information, contact us at:  
+Andrea Debeni: <andrea.debeni@studenti.unitn.it>  
+Giulia Dalle Sasse: <giulia.dallesasse@studenti.unitn.it>
