@@ -1,0 +1,306 @@
+---- Suzzara ----
+population: 21198, area: 61.0987, density: 346.95
+items: 18, societies: 28, agonists: 755, practicers: 851
+total segments: 23, total efforts: 46018, distinct athletes: 4748
+coni component: 0.03874893857911124
+osm_component: 0.2946052862008521
+strava_component: 0.6425071628524076
+Score for Suzzara= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 0.417
+-----------------------------
+---- Trento ----
+population: 120641, area: 157.8748, density: 764.16
+items: 405, societies: 210, agonists: 3948, practicers: 7584
+total segments: 404, total efforts: 1661057, distinct athletes: 405435
+coni component: 0.046521497666630746
+osm_component: 2.565323914899655
+strava_component: 2.1660095282195715
+Score for Trento= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 1.862
+-----------------------------
+---- Bari ----
+population: 315284, area: 117.4097, density: 2685.33
+items: 290, societies: 432, agonists: 6055, practicers: 23395
+total segments: 113, total efforts: 293425, distinct athletes: 25697
+coni component: 0.04257431395186562
+osm_component: 2.469983314836849
+strava_component: 0.4805022974113076
+Score for Bari= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 0.99
+-----------------------------
+---- Brescia ----
+population: 196340, area: 90.3337, density: 2173.5
+items: 320, societies: 321, agonists: 4547, practicers: 18986
+total segments: 337, total efforts: 3088729, distinct athletes: 298619
+coni component: 0.05421004380156871
+osm_component: 3.5424210455234317
+strava_component: 1.603735066002894
+Score for Brescia= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 1.875
+-----------------------------
+---- Torino ----
+population: 857910, area: 130.0645, density: 6596.04
+items: 690, societies: 1016, agonists: 22913, practicers: 70231
+total segments: 542, total efforts: 6057618, distinct athletes: 623959
+coni component: 0.04995419099905584
+osm_component: 5.30506018167909
+strava_component: 0.7977408568185419
+Score for Torino= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 2.0
+-----------------------------
+---- Firenze ----
+population: 366927, area: 102.3156, density: 3586.23
+items: 407, societies: 966, agonists: 11427, practicers: 48146
+total segments: 379, total efforts: 4433393, distinct athletes: 679654
+coni component: 0.07380378113357698
+osm_component: 3.977888024895519
+strava_component: 0.6893653092372932
+Score for Firenze= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 1.553
+-----------------------------
+---- Milano ----
+population: 1406242, area: 181.6783, density: 7740.29
+items: 1339, societies: 1371, agonists: 25956, practicers: 152963
+total segments: 996, total efforts: 9907205, distinct athletes: 943453
+coni component: 0.055559284959487774
+osm_component: 7.370170240474509
+strava_component: 1.351241533340492
+Score for Milano= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 2.898
+-----------------------------
+---- Siena ----
+population: 54308, area: 118.5306, density: 458.18
+items: 89, societies: 92, agonists: 2312, practicers: 4242
+total segments: 335, total efforts: 2132005, distinct athletes: 470331
+coni component: 0.058481255063710685
+osm_component: 0.7508609591109806
+strava_component: 3.31431126934933
+Score for Siena= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 1.894
+-----------------------------
+---- Catania ----
+population: 296266, area: 182.796, density: 1620.75
+items: 313, societies: 394, agonists: 6329, practicers: 16005
+total segments: 202, total efforts: 1792586, distinct athletes: 150324
+coni component: 0.03575638108996645
+osm_component: 1.712291297402569
+strava_component: 1.4862333967196846
+Score for Catania= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 1.264
+-----------------------------
+---- Verona ----
+population: 259087, area: 198.9134, density: 1302.51
+items: 418, societies: 453, agonists: 7225, practicers: 38574
+total segments: 595, total efforts: 2481016, distinct athletes: 335893
+coni component: 0.07803401946064449
+osm_component: 2.1014169985531392
+strava_component: 3.3741509767144393
+Score for Verona= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 2.333
+-----------------------------
+---- Padova ----
+population: 210077, area: 93.0257, density: 2258.27
+items: 228, societies: 430, agonists: 8920, practicers: 38991
+total segments: 194, total efforts: 1388823, distinct athletes: 166578
+coni component: 0.10176459107850931
+osm_component: 2.4509356016670663
+strava_component: 0.7162343101765518
+Score for Padova= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 1.114
+-----------------------------
+---- Arco ----
+population: 17933, area: 63.2175, density: 283.67
+items: 102, societies: 39, agonists: 717, practicers: 1362
+total segments: 271, total efforts: 2029833, distinct athletes: 649840
+coni component: 0.05654380192940389
+osm_component: 1.6134772808162297
+strava_component: 2.9840751133575307
+Score for Arco= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 1.987
+-----------------------------
+---- Bologna ----
+population: 395416, area: 140.8566, density: 2807.22
+items: 395, societies: 601, agonists: 10127, practicers: 40360
+total segments: 284, total efforts: 1510386, distinct athletes: 139155
+coni component: 0.05771440710542821
+osm_component: 2.8042704424215836
+strava_component: 1.0980725283702442
+Score for Bologna= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 1.402
+-----------------------------
+---- Belluno ----
+population: 35675, area: 147.2211, density: 242.32
+items: 28, societies: 92, agonists: 1218, practicers: 7495
+total segments: 529, total efforts: 906406, distinct athletes: 172897
+coni component: 0.10710021023125438
+osm_component: 0.190190128996455
+strava_component: 11.444629182879334
+Score for Belluno= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 5.801
+-----------------------------
+---- Varese ----
+population: 80724, area: 54.8393, density: 1472.01
+items: 147, societies: 134, agonists: 2642, practicers: 7922
+total segments: 239, total efforts: 1105534, distinct athletes: 154329
+coni component: 0.06055200436053714
+osm_component: 2.680559379860793
+strava_component: 1.16308566219806
+Score for Varese= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 1.398
+-----------------------------
+---- Venezia ----
+population: 258685, area: 415.8927, density: 622.0
+items: 242, societies: 454, agonists: 6534, practicers: 24406
+total segments: 244, total efforts: 1683568, distinct athletes: 275085
+coni component: 0.05464870402226646
+osm_component: 0.5818808553263859
+strava_component: 2.400839869021484
+Score for Venezia= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 1.386
+-----------------------------
+---- Mantova ----
+population: 48835, area: 63.8062, density: 765.36
+items: 64, societies: 111, agonists: 3303, practicers: 8069
+total segments: 177, total efforts: 440566, distinct athletes: 69339
+coni component: 0.10894645233951061
+osm_component: 1.0030373223918678
+strava_component: 1.46940295706619
+Score for Mantova= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 1.057
+-----------------------------
+---- Genova ----
+population: 565752, area: 240.2876, density: 2354.48
+items: 601, societies: 843, agonists: 15032, practicers: 44737
+total segments: 961, total efforts: 5560054, distinct athletes: 512713
+coni component: 0.04906213323152194
+osm_component: 2.50116943196403
+strava_component: 4.426220672880491
+Score for Genova= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 2.973
+-----------------------------
+---- Grosseto ----
+population: 81912, area: 473.5252, density: 172.98
+items: 91, societies: 209, agonists: 3938, practicers: 8755
+total segments: 511, total efforts: 1818601, distinct athletes: 282460
+coni component: 0.07415030764723117
+osm_component: 0.19217562233224336
+strava_component: 19.01977951634758
+Score for Grosseto= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 9.582
+-----------------------------
+---- Aosta ----
+population: 33916, area: 21.3923, density: 1585.43
+items: 25, societies: 89, agonists: 1427, practicers: 2182
+total segments: 144, total efforts: 361034, distinct athletes: 45955
+coni component: 0.05360301922396509
+osm_component: 1.1686447927525325
+strava_component: 0.7135604207829296
+Score for Aosta= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 0.718
+-----------------------------
+---- Rovereto ----
+population: 40239, area: 50.9842, density: 789.24
+items: 100, societies: 82, agonists: 1329, practicers: 3783
+total segments: 254, total efforts: 685994, distinct athletes: 134365
+coni component: 0.05945972812445637
+osm_component: 1.9613919606466317
+strava_component: 1.6430803030715118
+Score for Rovereto= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 1.422
+-----------------------------
+---- Palermo ----
+population: 647422, area: 160.5878, density: 4031.58
+items: 338, societies: 739, agonists: 11095, practicers: 34408
+total segments: 496, total efforts: 4088714, distinct athletes: 336258
+coni component: 0.0326822381692312
+osm_component: 2.104767609992789
+strava_component: 1.4959617944822199
+Score for Palermo= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 1.386
+-----------------------------
+---- Vidor ----
+population: 3648, area: 13.4259, density: 271.71
+items: 3, societies: 4, agonists: 67, practicers: 90
+total segments: 58, total efforts: 367122, distinct athletes: 65282
+coni component: 0.021984649122807013
+osm_component: 0.22344870734922798
+strava_component: 1.2004368832739472
+Score for Vidor= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 0.672
+-----------------------------
+---- Lecce ----
+population: 93865, area: 238.8158, density: 393.04
+items: 158, societies: 201, agonists: 2817, practicers: 7517
+total segments: 289, total efforts: 590966, distinct athletes: 82842
+coni component: 0.05218132424226282
+osm_component: 0.6615977669819166
+strava_component: 5.2453323619590515
+Score for Lecce= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 2.832
+-----------------------------
+---- Trieste ----
+population: 201613, area: 85.1039, density: 2369.02
+items: 224, societies: 342, agonists: 8662, practicers: 15739
+total segments: 414, total efforts: 2447199, distinct athletes: 234989
+coni component: 0.058700579823721684
+osm_component: 2.632076790840373
+strava_component: 1.8199244823067475
+Score for Trieste= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 1.711
+-----------------------------
+---- Livorno ----
+population: 157017, area: 104.7138, density: 1499.49
+items: 257, societies: 345, agonists: 5739, practicers: 16107
+total segments: 120, total efforts: 342354, distinct athletes: 36191
+coni component: 0.0651598234586064
+osm_component: 2.4543087921553797
+strava_component: 0.7570289628904044
+Score for Livorno= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 1.128
+-----------------------------
+---- Napoli ----
+population: 948850, area: 118.9441, density: 7977.28
+items: 545, societies: 1021, agonists: 13778, practicers: 33420
+total segments: 343, total efforts: 1694737, distinct athletes: 192662
+coni component: 0.023877114401644094
+osm_component: 4.5819843102768445
+strava_component: 0.3782209063352819
+Score for Napoli= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 1.568
+-----------------------------
+---- Parma ----
+population: 200455, area: 260.5979, density: 769.21
+items: 317, societies: 266, agonists: 5632, practicers: 27288
+total segments: 478, total efforts: 2605660, distinct athletes: 224305
+coni component: 0.07263675139058642
+osm_component: 1.2164334401773769
+strava_component: 7.2187460931443574
+Score for Parma= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 3.989
+-----------------------------
+---- Rimini ----
+population: 149335, area: 135.7915, density: 1099.74
+items: 108, societies: 274, agonists: 4496, practicers: 14983
+total segments: 301, total efforts: 1670711, distinct athletes: 344273
+coni component: 0.06003147286302609
+osm_component: 0.7953369688087987
+strava_component: 1.3282347613539227
+Score for Rimini= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = 0.915
+-----------------------------
+Actual classification:
+Grosseto: 9.582
+Belluno: 5.801
+Parma: 3.989
+Genova: 2.973
+Milano: 2.898
+Lecce: 2.832
+Verona: 2.333
+Torino: 2.0
+Arco: 1.987
+Siena: 1.894
+Brescia: 1.875
+Trento: 1.862
+Trieste: 1.711
+Napoli: 1.568
+Firenze: 1.553
+Rovereto: 1.422
+Bologna: 1.402
+Varese: 1.398
+Venezia: 1.386
+Palermo: 1.386
+Catania: 1.264
+Livorno: 1.128
+Padova: 1.114
+Mantova: 1.057
+Bari: 0.99
+Rimini: 0.915
+Aosta: 0.718
+Vidor: 0.672
+Suzzara: 0.417
+--------------------
+Top 10:
+Grosseto: 9.582
+Belluno: 5.801
+Parma: 3.989
+Genova: 2.973
+Milano: 2.898
+Lecce: 2.832
+Verona: 2.333
+Torino: 2.0
+Arco: 1.987
+Siena: 1.894
+-------------------------------
+----- Analysis completed. -----
+-------------------------------

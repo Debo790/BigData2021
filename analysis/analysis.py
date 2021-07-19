@@ -9,7 +9,6 @@ import shapely.geometry as shp
 import shapely.ops as ops
 import schedule
 import time
-import json
 sys.path.append(os.getcwd())
 import src.db_wrapper as wrapper
 
@@ -76,7 +75,7 @@ class Analyzer():
                                                     "{}2:effort_count".format(i): str(self.top10["effort_count"][i]),
                                                     "{}3:athlete_count".format(i): str(self.top10["athlete_count"][i]),
                                                     "{}4:distance".format(i): str(self.top10["distance"][i]),
-                                                    "{}5:geometry".format(i): str(self.top10["geometry"][i]),})
+                                                    "{}5:geometry".format(i): str(self.top10["geometry"][i])})
         self.r.save()
         for_flask = self.top10
         for_flask.geometry = for_flask.geometry.map(lambda polygon: ops.transform(lambda x, y:(y,x), polygon))
@@ -111,6 +110,17 @@ class Analyzer():
         print("Score for {}= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = {}".format(city, score))
         print("-----------------------------")
 
+        with open("analysis/out.txt", "a+") as file:
+            file.write("---- {} ----\n".format(city))
+            file.write("population: {}, area: {}, density: {}\n".format(population, area, density))
+            file.write("items: {}, societies: {}, agonists: {}, practicers: {}\n".format(sport_items, societies, agonist, practicing))
+            file.write("total segments: {}, total efforts: {}, distinct athletes: {}\n".format(segments, total_effort, total_athletes))
+            file.write("coni component: {}\n".format(coni_component))
+            file.write("osm_component: {}\n".format(osm_component))
+            file.write("strava_component: {}\n".format(strava_component))
+            file.write("Score for {}= osm_component*0.3 + coni_component*0.2 + strava_component*0.5 = {}\n".format(city, score))
+            file.write("-----------------------------\n")
+
         self.r.zadd("sport:index", {city: score})
         self.r.save()
         self.update(city, agonist, practicing, total_effort, total_athletes)
@@ -128,7 +138,7 @@ class Analyzer():
             self.compute_index(self.city)
 
         
-        print("Classification:")
+        print("Actual classification:")
         for i in self.r.zrevrange("sport:index", 0, -1, withscores=True):
             print(i[0].decode("utf-8"), i[1])
 
@@ -139,16 +149,32 @@ class Analyzer():
         print("-------------------------------")
         print("----- Analysis completed. -----")
         print("-------------------------------")
+
+
+        with open("analysis/out.txt", "a+") as file:
+            file.write("Actual classification:\n")
+            for i in self.r.zrevrange("sport:index", 0, -1, withscores=True):
+                file.write("{}: {}\n".format(i[0].decode("utf-8"), i[1]))
+            file.write("--------------------\n")
+            file.write("Top 10:\n")
+            for i in r.zrevrangebyscore("sport:index", 100, 0, withscores=True, start=0, num=10):
+                file.write("{}: {}\n".format(i[0].decode("utf-8"), i[1]))
+            file.write("-------------------------------\n")
+            file.write("----- Analysis completed. -----\n")
+            file.write("-------------------------------\n")
         
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="BDT Project 2021 - Data analysis")
+    parser.add_argument("--time", type=int, help="how often the script should run", required=False, default=1800)
     
+    args = parser.parse_args()
+    seconds = args.time
     
     r = redis.Redis(host='localhost', port=6379, db=0)
 
     an = Analyzer(r)
-    schedule.every(30).minutes.do(an.run)
+    schedule.every(seconds).seconds.do(an.run)
     while 1:
         schedule.run_pending()
         time.sleep(1)
