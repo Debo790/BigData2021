@@ -121,8 +121,12 @@ if __name__ == "__main__":
                 cities.append(i)
 
         if cities is not None:
-            ce = CityExtractor(cities)
-            success = ce.run(r)
+            if len(cities)>3:
+                print("Too many cities as argument (limit: 3).")
+                success = False
+            else:
+                ce = CityExtractor(cities)
+                success = ce.run(r)
 
             if success:
                 print("Done.")
