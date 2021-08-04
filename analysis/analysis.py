@@ -79,7 +79,7 @@ class Analyzer():
         self.r.save()
         for_flask = self.top10
         for_flask.geometry = for_flask.geometry.map(lambda polygon: ops.transform(lambda x, y:(y,x), polygon))
-        for_flask.to_file("flask/data/{}.json".format(city), driver="GeoJSON")
+        for_flask.to_file("flask/data/{}.geojson".format(city), driver="GeoJSON")
 
 
     def compute_index(self, city: str):
